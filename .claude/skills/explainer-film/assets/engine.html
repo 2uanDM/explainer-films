@@ -337,6 +337,8 @@ kbd{font:600 .86em/1 var(--f-mono);border:1px solid var(--line-strong);border-bo
   .rc-c{grid-row:1 / span 3;align-items:flex-start}
   .rc-n,.rc-w,.rc-t{grid-column:2}
   .rc-n{white-space:normal}
+  .rc-t .kb{white-space:normal;overflow-wrap:anywhere}
+  #recap,.rc-grid,.rc-row>span{min-width:0;max-width:100%}
 }
 @media (max-width:480px){
   .counter{display:none}
@@ -1854,7 +1856,7 @@ function frame(now) {
   }
   progress();
   const s = SCENES[Show.i];
-  if (s && Show.done && Show.auto && D.playing && !s.hold && D.t - Math.max(Show.endAt, Narr.busy()) > (s.after ?? 1.6) && Show.i < SCENES.length - 1) { Show.done = false; requestGo(Show.i + 1); }
+  if (s && Show.done && Show.auto && D.playing && !Show.seeking && !s.hold && D.t - Math.max(Show.endAt, Narr.busy()) > (s.after ?? 1.6) && Show.i < SCENES.length - 1) { Show.done = false; requestGo(Show.i + 1); }
 }
 
 /* ---------- dev (?dev): jump to an exact moment, used by scripts/preview.mjs ---------- */

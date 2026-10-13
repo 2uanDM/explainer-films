@@ -51,6 +51,7 @@ Rules that keep it working:
 - Read colors and `THREE` inside `setup()`/`run()`, not at the top level.
 - First scene: `hero: true, hold: true, dock: false`. Last: `hold: true, dock: false, titleCard: false` with `Recap.show()`.
 - Optional `style.css` next to story.js for extra CSS.
+- Keep recap `hint` chips short (under about 30 characters) and put long commands in the description text.
 
 ### 4. Voice, build, preview
 ```bash
@@ -58,7 +59,7 @@ uv run <skill>/scripts/build_vo.py films/<slug>          # synthesizes only new 
 python3 <skill>/scripts/build.py films/<slug>            # → index.html + publish.json, fails on errors
 node <skill>/scripts/preview.mjs films/<slug>            # screenshots + timing + console errors
 ```
-Then **look at the screenshots** (Read the PNGs) and fix what you see: subject out of frame, labels overlapping the board, empty stage, unreadable text. Fix every console error and timing warning (set each scene's `dur` to the reported length). Run `--mobile` once for the phone layout; there, the transport bar appears mid-page in the full-page screenshot, which is expected. Iterate until it's clean. A film that hasn't been previewed isn't finished.
+Then **look at the screenshots** (Read the PNGs; a blurred subtitle just means it was caught mid-fade) and fix what you see: subject out of frame, labels overlapping the board, empty stage, unreadable text. Fix every console error and timing warning (set each scene's `dur` to the reported length). Run `--mobile` once for the phone layout; there, the transport bar appears mid-page in the full-page screenshot, which is expected. Iterate until it's clean. A film that hasn't been previewed isn't finished.
 
 If edge-tts keeps failing (throttling), rerun with `--jobs 1`; finished clips are kept. With no network for TTS, run `python3 <skill>/scripts/build_vo.py films/<slug> --provider none` (plain python3, no uv download; subtitles only) and say so.
 
@@ -70,8 +71,7 @@ The page loads three.js from jsDelivr and fonts from Google Fonts, so viewers ne
 Pick the route for the agent you are running in. Each film is a static site: `index.html` plus `vo/*.mp3`.
 
 **Claude (claude.ai Artifact tool available):** load the `artifact-design` skill if the Artifact tool asks for it (the engine already meets the page contract: dark theme, title, scripts only from jsDelivr, Google Fonts, 16px gutters on phones). Then call the Artifact tool with:
-- `file_path`: `films/<slug>/index.html`
-- `files`: the map in `films/<slug>/publish.json` (`{"vo/<id>.mp3": "<path>"}`)
+- `file_path`, `root` and `files`: copy them from `films/<slug>/publish.json`. `root` is the film folder, so `files` maps each `vo/<id>.mp3` to itself. The paths are relative to where build.py ran; if you're elsewhere now, rerun build.py first.
 - `icon`: e.g. `film`; `description`: one sentence about what the film teaches.
 
 Source files must be inside the working directory or the scratchpad. More than 250 clips: publish in batches to the same URL. To update, republish **the same file path** (same URL) with the changed clips.

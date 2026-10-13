@@ -126,7 +126,13 @@ def main() -> None:
     dest = a.out or film / "index.html"
     dest.write_text(out, encoding="utf-8")
     files = {f"vo/{cid}.mp3": str((film / "vo" / f"{cid}.mp3")) for cid, _, _ in vo.values()}
-    (film / "publish.json").write_text(json.dumps({"file_path": str(dest), "files": files}, indent=1) + "\n")
+    # portable: paths relative to the film folder, which is passed as the Artifact `root`
+    try:
+        root = str(film.relative_to(Path.cwd()))
+    except ValueError:
+        root = str(film)
+    rel = {k: k for k in files}
+    (film / "publish.json").write_text(json.dumps({"root": root, "file_path": f"{root}/{dest.name}" if dest.parent == film else str(dest), "files": rel}, indent=1) + "\n")
     n_scenes = len(ids)
     secs = sum(v[1] for v in vo.values())
     size = dest.stat().st_size + sum(Path(p).stat().st_size for p in files.values())
