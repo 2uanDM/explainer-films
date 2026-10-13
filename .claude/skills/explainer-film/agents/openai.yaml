@@ -1,0 +1,7 @@
+interface:
+  display_name: "Explainer Film"
+  short_description: "Narrated 3D learning videos with quizzes, any topic or language"
+  brand_color: "#D97757"
+  default_prompt: "Make a narrated learning video about "
+policy:
+  allow_implicit_invocation: true

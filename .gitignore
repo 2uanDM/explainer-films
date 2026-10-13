@@ -1,0 +1,4 @@
+films/*/preview*/
+films/*/dist/
+__pycache__/
+*.part

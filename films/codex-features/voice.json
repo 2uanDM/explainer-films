@@ -1,0 +1,7 @@
+{
+  "provider": "edge",
+  "voice": "en-US-AndrewMultilingualNeural",
+  "rate": "+0%",
+  "pitch": "+0Hz",
+  "lexicon": {}
+}
