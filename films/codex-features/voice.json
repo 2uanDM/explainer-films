@@ -3,5 +3,32 @@
   "voice": "en-US-AndrewMultilingualNeural",
   "rate": "+0%",
   "pitch": "+0Hz",
-  "lexicon": {}
+  "model": "",
+  "instructions": "",
+  "lexicon": {
+    "AGENTS.md": "agents dot M D",
+    "SKILL.md": "skill dot M D",
+    "/init": "slash init",
+    "/skills": "slash skills",
+    "/permissions": "slash permissions",
+    "/diff": "slash diff",
+    "/review": "slash review",
+    "/goal": "slash goal",
+    "/mcp": "slash M C P",
+    "/plugins": "slash plugins",
+    "/hooks": "slash hooks",
+    "$release-notes": "dollar release notes",
+    ".agents/skills": "dot agents slash skills",
+    ".codex/agents": "dot codex slash agents",
+    ".codex/hooks.json": "dot codex slash hooks dot JSON",
+    "--approve-for-me": "dash dash approve for me",
+    "--worktree": "dash dash worktree",
+    "--base main": "dash dash base main",
+    "@codex review": "at codex review",
+    "32 KiB": "thirty-two kibibytes",
+    "MCP": "M C P",
+    "TOML": "tom-ul",
+    "PreToolUse": "pre tool use",
+    "CI": "C I"
+  }
 }
