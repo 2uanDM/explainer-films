@@ -114,6 +114,8 @@ for (const s of scenes) {
     await evaluate(`seek(${t})`);
     await sleep(800);   // let real frames render and CSS fades (subtitles, cards) settle
     shots.push(await shot(`${s.num}-${s.id}-${String(t).replace('.', '_')}s`));
+    const ovf = await evaluate('(() => { const W = document.documentElement.clientWidth, sw = document.documentElement.scrollWidth; if (sw <= W + 1) return null; const bad = [...document.querySelectorAll("#app *")].filter(e => { const r = e.getBoundingClientRect(); return r.width && r.right > W + 1 && getComputedStyle(e).position !== "fixed"; }).slice(0, 4).map(e => "#" + (e.id || e.className || e.tagName)); return `page is ${sw - W}px wider than the screen at ${t}s (${bad.join(", ")})`; })()');
+    if (ovf) problems.push(`${s.id}: ${ovf}`);
   }
   let end = null, busy = null;
   if (!s.hold) {

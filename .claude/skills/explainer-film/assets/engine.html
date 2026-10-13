@@ -338,7 +338,9 @@ kbd{font:600 .86em/1 var(--f-mono);border:1px solid var(--line-strong);border-bo
   .rc-n,.rc-w,.rc-t{grid-column:2}
   .rc-n{white-space:normal}
   .rc-t .kb{white-space:normal;overflow-wrap:anywhere}
-  #recap,.rc-grid,.rc-row>span{min-width:0;max-width:100%}
+  #recap{min-width:0;max-width:calc(100% - var(--gutter) * 2)}
+  .rc-grid,.rc-row>span,.rc-head>div{min-width:0}
+  .rc-head h2{overflow-wrap:anywhere}
 }
 @media (max-width:480px){
   .counter{display:none}
