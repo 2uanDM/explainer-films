@@ -1,232 +1,137 @@
 {
- "Monday. The team opens Codex on the shop app, and it knows nothing about the project yet.": [
-  "f185ad0322",
-  5.95,
-  "rules"
+ "Monday, nine a.m. Ticket SHOP-142 lands: discount codes at checkout.": [
+  "7e36eca3cd",
+  5.66,
+  "brief"
  ],
- "Type /init, and Codex writes a starter AGENTS.md for the repo.": [
-  "2f6c5823cb",
-  6.05,
-  "rules"
- ],
- "It holds your standing rules: how to build, how to test, and what never to touch.": [
-  "8611b5052a",
-  5.62,
-  "rules"
- ],
- "Codex reads a global file in your home folder first, then one per folder from the Git root down to where you are.": [
-  "6ab1bfc2de",
-  6.91,
-  "rules"
- ],
- "They are joined root first, so the closest file wins. Together they are capped at 32 KiB.": [
-  "35558fddb9",
-  7.2,
-  "rules"
- ],
- "For a workflow you repeat, write a skill: a folder with a SKILL.md that has a name and a description.": [
-  "130c7f5f4d",
-  7.03,
-  "rules"
- ],
- "Team skills live in the repo under .agents/skills, and personal ones under the same folder in your home.": [
-  "0ee5b5f594",
-  7.03,
-  "rules"
- ],
- "Call one with a dollar sign and its name, like $release-notes, or pick it from /skills.": [
-  "cdc87ac719",
-  5.57,
-  "rules"
- ],
- "A skill loads only when it is needed, so a big library stays cheap.": [
-  "befe3387c5",
-  4.9,
-  "rules"
- ],
- "Tuesday. Before Codex touches anything, decide how far it may act. That is the sandbox.": [
-  "e39955bca4",
-  6.89,
-  "sandbox"
- ],
- "Read-only lets it look around and answer, but not change a file.": [
-  "2c59a85ef5",
-  3.74,
-  "sandbox"
- ],
- "Workspace-write lets it edit files and run commands inside your project.": [
-  "f1aee1163f",
-  4.9,
-  "sandbox"
- ],
- "Danger full access takes the walls away completely.": [
-  "7f72de279f",
-  4.13,
-  "sandbox"
- ],
- "Pick one with the s flag when you start, or switch in the middle of a session with /permissions.": [
-  "74e2eeeaff",
-  5.3,
-  "sandbox"
- ],
- "Tired of approval prompts? With --approve-for-me, a reviewer model answers eligible requests for you.": [
-  "91d9043ecd",
-  6.94,
-  "sandbox"
- ],
- "The full bypass flag, nicknamed yolo, is not recommended. Keep it for throwaway machines.": [
-  "b77ffc6e96",
-  6.46,
-  "sandbox"
- ],
- "Before you commit, /diff shows every change, untracked files included.": [
-  "e9b339c819",
-  5.98,
-  "sandbox"
- ],
- "Then /review has Codex review that diff, the way a colleague would.": [
-  "a98e6e8330",
-  4.1,
-  "sandbox"
- ],
- "Outside a session, codex review --base main does the same from your shell.": [
-  "61e6bfc81d",
-  5.54,
-  "sandbox"
- ],
- "Wednesday. Three bugs land at once. One agent would fix them one at a time.": [
-  "4bd6b35bc1",
-  4.8,
-  "crew"
- ],
- "Instead, ask in plain words: spawn one agent per bug.": [
-  "35f4d419fe",
-  4.3,
-  "crew"
- ],
- "These are subagents. Each one takes its own job, works in parallel, and reports back.": [
-  "325356b48b",
-  5.78,
-  "crew"
- ],
- "Codex has built-in agents: default, worker and explorer.": [
-  "674d40c6ab",
-  4.78,
-  "crew"
- ],
- "Add your own as TOML files in the .codex/agents folder.": [
-  "65d3be310a",
-  5.21,
-  "crew"
- ],
- "Subagents use more tokens, so save them for jobs that really are independent.": [
-  "a25df76d01",
-  5.4,
-  "crew"
- ],
- "When they all edit files, give each task its own checkout with codex --worktree.": [
-  "e56b51276f",
-  5.42,
-  "crew"
- ],
- "Every worktree is its own Git checkout, so parallel edits never collide.": [
-  "037af56837",
-  5.45,
-  "crew"
- ],
- "Thursday brings a long job: move the whole test suite to a new runner.": [
-  "910b900829",
-  4.75,
-  "longhaul"
- ],
- "Give Codex a finish line it can check, with /goal.": [
-  "ae237e7fd8",
-  3.6,
-  "longhaul"
- ],
- "It keeps working toward that goal, step after step, until the condition holds.": [
-  "7580d9b579",
-  5.23,
-  "longhaul"
- ],
- "Some tasks don’t need your laptop at all. Codex Cloud runs them remotely.": [
-  "c1984d51b7",
-  4.82,
-  "longhaul"
- ],
- "When it’s finished, codex apply brings the changes back to your checkout.": [
-  "3bb8fb5d8c",
-  4.66,
-  "longhaul"
- ],
- "And on GitHub, comment @codex review on a pull request, once code review is enabled for the repo.": [
-  "25bd5c50a1",
-  6.72,
-  "longhaul"
- ],
- "Friday is for wiring Codex into everything else.": [
-  "124c594c40",
-  3.94,
-  "plugin"
- ],
- "MCP servers connect outside tools. Add one with codex mcp add, and check them with /mcp.": [
-  "562bf9b7df",
-  7.9,
-  "plugin"
- ],
- "Plugins bundle skills, connectors and MCP servers, so the whole team shares one setup.": [
-  "4be467cd70",
-  6.89,
-  "plugin"
- ],
- "Add a marketplace with codex plugin marketplace add, then browse it with /plugins.": [
-  "be79889dc7",
-  5.98,
-  "plugin"
- ],
- "Hooks run your own scripts at fixed moments, like before a tool runs or when a session stops.": [
-  "ce6fa94cf1",
-  5.74,
-  "plugin"
- ],
- "Here, a PreToolUse hook blocks a dangerous command before it ever runs.": [
-  "e707d32bb1",
+ "Before any code, Codex needs the house rules. Type /init.": [
+  "2fa32893de",
   4.97,
-  "plugin"
+  "brief"
  ],
- "Hooks live in .codex/hooks.json, and project hooks only run in a trusted project. /hooks shows them.": [
-  "59b7ee830c",
-  8.9,
-  "plugin"
+ "Codex reads the repo and writes an AGENTS.md: the commands, the conventions, how to test.": [
+  "9c68a0f925",
+  7.1,
+  "brief"
  ],
- "For CI and scripts, codex exec runs headless, with JSON events and the last message saved to a file.": [
-  "af964f88c1",
-  8.42,
-  "plugin"
+ "Every session reads it: your global file first, then each folder down from the repo root. The closest one wins.": [
+  "80eed07151",
+  7.92,
+  "brief"
  ],
- "And when the week ends, codex resume picks a session back up, and codex fork branches it.": [
-  "056f64bd70",
-  6.17,
-  "plugin"
+ "Next, how much freedom? /permissions offers three choices.": [
+  "0124cb86f0",
+  4.78,
+  "brief"
  ],
- "Quick check. Codex must edit files and run tests in the repo, and nothing else. Which sandbox fits?": [
-  "410102b58e",
-  7.37,
+ "Ask for approval edits and runs commands inside the repo, and asks before going online or outside it.": [
+  "fd8d70ddff",
+  6.91,
+  "brief"
+ ],
+ "Approve for me only stops for actions that look unsafe. Full Access never asks, so keep it for throwaway machines.": [
+  "0caad849fa",
+  8.09,
+  "brief"
+ ],
+ "Last, team know-how. A skill is a folder with a SKILL.md, loaded only when a task needs it.": [
+  "e4268ccac0",
+  7.01,
+  "brief"
+ ],
+ "Call one with a dollar sign, and Codex applies the team rules to this ticket.": [
+  "5e2b8c2e80",
+  4.99,
+  "brief"
+ ],
+ "Tuesday. Time to build, and one prompt asks Codex to split the work.": [
+  "bbb582adb6",
+  5.3,
+  "build"
+ ],
+ "Codex starts a subagent, an explorer, to trace the checkout math.": [
+  "107727bb84",
+  5.28,
+  "build"
+ ],
+ "Each subagent takes one job and reports back. Built-in roles are default, worker and explorer, and your own go in .codex/agents.": [
+  "59367842ad",
+  9.98,
+  "build"
+ ],
+ "With the report in hand, Codex edits two files and adds the tests.": [
+  "2c7e0fd218",
+  5.09,
+  "build"
+ ],
+ "Two tasks editing at once? Start each with codex --worktree, and each gets its own Git checkout.": [
+  "97cb6d659a",
+  7.2,
+  "build"
+ ],
+ "For the docs, give Codex a finish line it can check, with /goal.": [
+  "87fb972a77",
+  4.61,
+  "build"
+ ],
+ "It keeps working until the condition holds: docs written, all eleven tests green.": [
+  "fa0155cb9b",
+  5.35,
+  "build"
+ ],
+ "Wednesday. Before shipping, look at everything that changed. /diff shows it all, untracked files included.": [
+  "df97c8e861",
+  7.18,
+  "ship"
+ ],
+ "Then /review. Pick uncommitted changes, and Codex reviews them the way a colleague would.": [
+  "09b3343dd0",
+  6.14,
+  "ship"
+ ],
+ "Some rules must hold every time, not only when Codex remembers. That is what hooks are for.": [
+  "28864526cd",
+  6.31,
+  "ship"
+ ],
+ "A PreToolUse hook runs before each tool call. This one blocks a force push to main.": [
+  "c092f1ef0b",
+  5.71,
+  "ship"
+ ],
+ "Last, close the loop. MCP servers connect Codex to outside tools, and /mcp lists them.": [
+  "fa3bd7156f",
+  7.3,
+  "ship"
+ ],
+ "With the tracker connected, Codex moves SHOP-142 to Done and links the pull request.": [
+  "0d97cf65ef",
+  6.26,
+  "ship"
+ ],
+ "And plugins bundle skills and MCP servers, so the whole team installs one setup from /plugins.": [
+  "cf52488f03",
+  7.9,
+  "ship"
+ ],
+ "Quick check. Codex should edit files and run tests inside the repo, and ask before anything else. Which permission fits?": [
+  "bd2b8cfa0f",
+  8.59,
   "check"
  ],
- "Right. Workspace-write is exactly enough, and no more.": [
-  "d6efc9f3a8",
-  4.44,
+ "Right. Ask for approval is the everyday choice.": [
+  "28e331cb16",
+  3.79,
   "check"
  ],
- "It’s workspace-write. Read-only can’t edit, and full access is far too much.": [
-  "3f318c0a17",
-  5.21,
+ "It is Ask for approval. Approve for me skips most prompts, and Full Access skips them all.": [
+  "bc7105c194",
+  5.95,
   "check"
  ],
- "The least access that still gets the job done. That’s the habit to keep.": [
-  "2f4dc3cd82",
-  4.42,
+ "The least freedom that still gets the job done. That is the habit to keep.": [
+  "989f8b3b49",
+  4.51,
   "check"
  ]
 }

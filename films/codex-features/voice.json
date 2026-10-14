@@ -29,6 +29,9 @@
     "MCP": "M C P",
     "TOML": "tom-ul",
     "PreToolUse": "pre tool use",
-    "CI": "C I"
+    "CI": "C I",
+    "$checkout-rules": "dollar checkout rules",
+    "SHOP-142": "shop one forty-two",
+    "codex --worktree": "codex dash dash worktree"
   }
 }

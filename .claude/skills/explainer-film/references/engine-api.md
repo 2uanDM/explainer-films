@@ -109,6 +109,8 @@ Notes: `Board.k(kicker)`, `.h(heading)`, `.p(text)`, `.li(text, 'ok'|'bad'|'dim'
 
 Terminal: `await Board.type(cmd)` (typed into the input line, then echoed), `.placeholder(s)`, `.user(s)`, `.say(s)`, `.out(lines)`, `.shellLine(cwd, s)`, `const h = Board.tool(name, arg)`, then `h.ok(lines)` / `h.err(lines)` / `h.sub(lines)`, `.did(name, arg, result)`, `await Board.spin(verb, secs)` or `const s = Board.spin(verb); ... s.stop()`.
 
+Status line and input: `Board.footer(html)` (a line under the input, like a CLI's model and folder bar; cleared each scene), `await Board.typeOnly(s)` (types into the input without echoing; clear it with `Board.placeholder(s)`).
+
 General: `Board.title(s)`, `Board.mode('notes'|'term')`, `Board.clear()`, `Board.input(true|false)`, `Board.raw(html, cls)`. Each method returns the entry element.
 
 ## 6. Quiz, Note, Recap, Toast, chips
@@ -143,6 +145,8 @@ if (r.correct) await N('Exactly.'); else await N('The answer is B, because …')
 | `await c.tint(color)` | recolor |
 | `bubble(c, 'text', secs, 'think'\|'alert'\|'good')` | speech bubble above the head |
 | `c.head` | Object3D above the head, for labels |
+
+**Custom mascot (`FILM.guideSkin`):** `guideSkin(g)` runs for every character (the guide and each `guide()`/`mini()`). Hide the default parts (`g.body.children` except `g.arms`), add your own meshes to `g.body` using `g.mat` so tints and mini colors still work, and reposition `g.arms`, `g.legs` and `g.head` (the bubble anchor). Set `g.skinned = true`. Optional callbacks: `g.onExpr(expr)` (redraw a face), `g.onTick(dt, sdt, time)` (per-frame idle), `g.onReset()`. The Codex film (explainer-films repo, `films/codex-features/story.js` → `codexPet`) is a worked example: a cloud head built from spheres, a canvas-texture screen face, and a blinking cursor.
 
 The guide is about 1.3 units tall; the island is 10×10 centered on the origin (x and z from -4.8 to 4.8).
 

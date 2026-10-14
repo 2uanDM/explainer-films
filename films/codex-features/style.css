@@ -1,0 +1,66 @@
+/* Codex CLI skin for the board, copied from the real TUI (see reference/codex-tui.md) */
+.board.cx{background:rgba(5,5,7,.97);border-color:rgba(255,255,255,.12);border-radius:10px}
+.cx .bd-bar{background:#141416;border-bottom-color:rgba(255,255,255,.08);color:#9a9aa2}
+.cx .bd-body{padding:14px 18px 10px}
+.cx .bd-log{font:400 var(--b-size)/1.5 var(--f-mono);color:#d6d6d6;gap:.32em}
+.cx .ln{animation-duration:.18s}
+.cx .bi-rule{display:none}
+.cx .bi-line{background:#151517;border-radius:4px;padding:.55em .7em;margin-top:.3em}
+.cx .bi-caret{color:#d6d6d6;font-weight:700}
+.cx .bi-text.ph{color:#6c6c74}
+.cx .bi-cursor{background:#d6d6d6}
+.cx .bd-foot{padding:.45em .7em 0;line-height:1.55;color:#7c7c84}
+.cx-model{color:#f6e2b7}.cx-cwd{color:#abdfa7}.cx-thread{color:#f5e0dc}
+.cx-badge{float:right;color:#d38cf0}
+.cx-hint{color:#6c6c74}
+.cx-hint b{color:#9a9aa2;font-weight:700}
+/* header */
+.cx-hdr{color:#d6d6d6;line-height:1.55;margin-bottom:.5em}
+.cx-mark{color:#63a8f8;font-weight:700}
+.cx-hdr b{color:#fff}
+.cx .d,.cx-d{color:#7c7c84}
+.cx-yolo{color:#d33fd3;font-weight:700}
+/* rows */
+.cx-user{color:#e8e8e8;background:#151517;border-radius:4px;padding:.3em .6em;margin:.25em 0}
+.cx-user .chev{color:#8a8a92;font-weight:700;margin-right:.6ch}
+.cx-row{display:flex;gap:1ch}
+.cx-row>.dot{flex:none;font-weight:700;color:#f2f2f2}
+.cx-row.ok>.dot{color:#5fd068}
+.cx-row.err>.dot{color:#ff6b6b}
+.cx-row.dim>.dot{color:#808080}
+.cx-row .tx{min-width:0;overflow-wrap:anywhere}
+.cx-row b{color:#fff;font-weight:700}
+.cx-sub{padding-left:2ch;color:#a8a8b0;overflow-wrap:anywhere}
+.cx-sub .el{color:#6c6c74}
+.cx-sub.err{color:#ff8a8a}
+.cx-more{padding-left:4ch;color:#6c6c74}
+.cx-worked{padding-left:2ch;color:#6c6c74}
+.cx-body{padding-left:2ch}
+.cx-agent{color:#63a8f8}
+/* shell highlight (catppuccin-like, as Codex renders it) */
+.sh-c{color:#89b4fa}.sh-a{color:#cdd6f4}.sh-f{color:#eba0ac}.sh-s{color:#a6e3a1}.sh-p{color:#94e2d5}
+/* working line */
+.cx-work .dot{animation:cxPulse 1s ease-in-out infinite}
+.cx-work .tx{color:#7c7c84}.cx-work .tx b{color:#a8a8b0}
+@keyframes cxPulse{0%,100%{color:#808080}50%{color:#f2f2f2}}
+/* diffs */
+.cx-diff{font-size:.94em}
+.cx-diff .r{display:flex;gap:1ch;padding-left:3ch}
+.cx-diff .n{color:#6c6c74;min-width:2ch;text-align:right}
+.cx-diff .r.add{background:#213a2b}.cx-diff .r.del{background:#4a221d}
+.cx-diff .r.add .s{color:#5fd068}.cx-diff .r.del .s{color:#ff6b6b}
+.cx-diff .hunk{color:#3fc1c9;padding-left:3ch}
+.cx-plus{color:#5fd068}.cx-minus{color:#ff6b6b}
+/* menus */
+.cx-menu{margin:.3em 0;line-height:1.6}
+.cx-menu .t{color:#fff;font-weight:700}
+.cx-menu .o{display:flex;gap:1.5ch;padding:0 .4ch}
+.cx-menu .o .l{flex:none;min-width:17ch}
+.cx-menu .o.sel{background:#d6d6d6;color:#000}
+.cx-menu .o.sel .ds{color:#222}
+.cx-menu .o .ds{color:#8a8a92}
+.cx-menu .h{color:#6c6c74}
+.cx-marker{color:#63a8f8}
+.cx-goal .o{color:#7c7c84}
+.cx-tbl{display:grid;grid-template-columns:max-content 1fr;gap:0 2ch;padding-left:2ch;color:#a8a8b0}
+.cx-ok{color:#5fd068}.cx-no{color:#7c7c84}.cx-warn{color:#c4a767}

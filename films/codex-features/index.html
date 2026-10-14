@@ -135,6 +135,8 @@ kbd{font:600 .86em/1 var(--f-mono);border:1px solid var(--line-strong);border-bo
 .bi-caret{color:var(--b-dim);flex:none}
 .bi-text{white-space:pre-wrap;word-break:break-word}
 .bi-text.ph{color:var(--b-faint)}
+.bd-foot{font-size:.9em;color:var(--b-dim);padding:.3em 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bd-foot:empty{display:none}
 .bi-cursor{display:inline-block;width:.62em;height:1.2em;background:var(--b-fg);vertical-align:-.2em;animation:cur 1.05s steps(2,start) infinite;margin-left:-1ch;flex:none}
 @keyframes cur{to{visibility:hidden}}
 /* entries */
@@ -352,6 +354,72 @@ kbd{font:600 .86em/1 var(--f-mono);border:1px solid var(--line-strong);border-bo
   .ln,.lbl>.in,.nl,#titlecard.show>*,#titlecard.hide>*,.rc-row>span,#recap{animation-duration:.01s!important;transition-duration:.01s!important}
   #b-voice.talk .vw{animation:none}
 }
+/* Codex CLI skin for the board, copied from the real TUI (see reference/codex-tui.md) */
+.board.cx{background:rgba(5,5,7,.97);border-color:rgba(255,255,255,.12);border-radius:10px}
+.cx .bd-bar{background:#141416;border-bottom-color:rgba(255,255,255,.08);color:#9a9aa2}
+.cx .bd-body{padding:14px 18px 10px}
+.cx .bd-log{font:400 var(--b-size)/1.5 var(--f-mono);color:#d6d6d6;gap:.32em}
+.cx .ln{animation-duration:.18s}
+.cx .bi-rule{display:none}
+.cx .bi-line{background:#151517;border-radius:4px;padding:.55em .7em;margin-top:.3em}
+.cx .bi-caret{color:#d6d6d6;font-weight:700}
+.cx .bi-text.ph{color:#6c6c74}
+.cx .bi-cursor{background:#d6d6d6}
+.cx .bd-foot{padding:.45em .7em 0;line-height:1.55;color:#7c7c84}
+.cx-model{color:#f6e2b7}.cx-cwd{color:#abdfa7}.cx-thread{color:#f5e0dc}
+.cx-badge{float:right;color:#d38cf0}
+.cx-hint{color:#6c6c74}
+.cx-hint b{color:#9a9aa2;font-weight:700}
+/* header */
+.cx-hdr{color:#d6d6d6;line-height:1.55;margin-bottom:.5em}
+.cx-mark{color:#63a8f8;font-weight:700}
+.cx-hdr b{color:#fff}
+.cx .d,.cx-d{color:#7c7c84}
+.cx-yolo{color:#d33fd3;font-weight:700}
+/* rows */
+.cx-user{color:#e8e8e8;background:#151517;border-radius:4px;padding:.3em .6em;margin:.25em 0}
+.cx-user .chev{color:#8a8a92;font-weight:700;margin-right:.6ch}
+.cx-row{display:flex;gap:1ch}
+.cx-row>.dot{flex:none;font-weight:700;color:#f2f2f2}
+.cx-row.ok>.dot{color:#5fd068}
+.cx-row.err>.dot{color:#ff6b6b}
+.cx-row.dim>.dot{color:#808080}
+.cx-row .tx{min-width:0;overflow-wrap:anywhere}
+.cx-row b{color:#fff;font-weight:700}
+.cx-sub{padding-left:2ch;color:#a8a8b0;overflow-wrap:anywhere}
+.cx-sub .el{color:#6c6c74}
+.cx-sub.err{color:#ff8a8a}
+.cx-more{padding-left:4ch;color:#6c6c74}
+.cx-worked{padding-left:2ch;color:#6c6c74}
+.cx-body{padding-left:2ch}
+.cx-agent{color:#63a8f8}
+/* shell highlight (catppuccin-like, as Codex renders it) */
+.sh-c{color:#89b4fa}.sh-a{color:#cdd6f4}.sh-f{color:#eba0ac}.sh-s{color:#a6e3a1}.sh-p{color:#94e2d5}
+/* working line */
+.cx-work .dot{animation:cxPulse 1s ease-in-out infinite}
+.cx-work .tx{color:#7c7c84}.cx-work .tx b{color:#a8a8b0}
+@keyframes cxPulse{0%,100%{color:#808080}50%{color:#f2f2f2}}
+/* diffs */
+.cx-diff{font-size:.94em}
+.cx-diff .r{display:flex;gap:1ch;padding-left:3ch}
+.cx-diff .n{color:#6c6c74;min-width:2ch;text-align:right}
+.cx-diff .r.add{background:#213a2b}.cx-diff .r.del{background:#4a221d}
+.cx-diff .r.add .s{color:#5fd068}.cx-diff .r.del .s{color:#ff6b6b}
+.cx-diff .hunk{color:#3fc1c9;padding-left:3ch}
+.cx-plus{color:#5fd068}.cx-minus{color:#ff6b6b}
+/* menus */
+.cx-menu{margin:.3em 0;line-height:1.6}
+.cx-menu .t{color:#fff;font-weight:700}
+.cx-menu .o{display:flex;gap:1.5ch;padding:0 .4ch}
+.cx-menu .o .l{flex:none;min-width:17ch}
+.cx-menu .o.sel{background:#d6d6d6;color:#000}
+.cx-menu .o.sel .ds{color:#222}
+.cx-menu .o .ds{color:#8a8a92}
+.cx-menu .h{color:#6c6c74}
+.cx-marker{color:#63a8f8}
+.cx-goal .o{color:#7c7c84}
+.cx-tbl{display:grid;grid-template-columns:max-content 1fr;gap:0 2ch;padding-left:2ch;color:#a8a8b0}
+.cx-ok{color:#5fd068}.cx-no{color:#7c7c84}.cx-warn{color:#c4a767}
 
 </style>
 </head>
@@ -390,6 +458,7 @@ kbd{font:600 .86em/1 var(--f-mono);border:1px solid var(--line-strong);border-bo
           <div class="bi-rule"></div>
           <div class="bi-line"><span class="bi-caret">&gt;</span><span class="bi-text" id="bi-text"></span><span class="bi-cursor" aria-hidden="true"></span></div>
           <div class="bi-rule"></div>
+          <div class="bd-foot" id="bd-foot"></div>
         </div>
       </div>
     </div>
@@ -425,7 +494,7 @@ kbd{font:600 .86em/1 var(--f-mono);border:1px solid var(--line-strong);border-bo
 
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module">
-const VO = {"Monday. The team opens Codex on the shop app, and it knows nothing about the project yet.": ["f185ad0322", 5.95, "rules"], "Type /init, and Codex writes a starter AGENTS.md for the repo.": ["2f6c5823cb", 6.05, "rules"], "It holds your standing rules: how to build, how to test, and what never to touch.": ["8611b5052a", 5.62, "rules"], "Codex reads a global file in your home folder first, then one per folder from the Git root down to where you are.": ["6ab1bfc2de", 6.91, "rules"], "They are joined root first, so the closest file wins. Together they are capped at 32 KiB.": ["35558fddb9", 7.2, "rules"], "For a workflow you repeat, write a skill: a folder with a SKILL.md that has a name and a description.": ["130c7f5f4d", 7.03, "rules"], "Team skills live in the repo under .agents/skills, and personal ones under the same folder in your home.": ["0ee5b5f594", 7.03, "rules"], "Call one with a dollar sign and its name, like $release-notes, or pick it from /skills.": ["cdc87ac719", 5.57, "rules"], "A skill loads only when it is needed, so a big library stays cheap.": ["befe3387c5", 4.9, "rules"], "Tuesday. Before Codex touches anything, decide how far it may act. That is the sandbox.": ["e39955bca4", 6.89, "sandbox"], "Read-only lets it look around and answer, but not change a file.": ["2c59a85ef5", 3.74, "sandbox"], "Workspace-write lets it edit files and run commands inside your project.": ["f1aee1163f", 4.9, "sandbox"], "Danger full access takes the walls away completely.": ["7f72de279f", 4.13, "sandbox"], "Pick one with the s flag when you start, or switch in the middle of a session with /permissions.": ["74e2eeeaff", 5.3, "sandbox"], "Tired of approval prompts? With --approve-for-me, a reviewer model answers eligible requests for you.": ["91d9043ecd", 6.94, "sandbox"], "The full bypass flag, nicknamed yolo, is not recommended. Keep it for throwaway machines.": ["b77ffc6e96", 6.46, "sandbox"], "Before you commit, /diff shows every change, untracked files included.": ["e9b339c819", 5.98, "sandbox"], "Then /review has Codex review that diff, the way a colleague would.": ["a98e6e8330", 4.1, "sandbox"], "Outside a session, codex review --base main does the same from your shell.": ["61e6bfc81d", 5.54, "sandbox"], "Wednesday. Three bugs land at once. One agent would fix them one at a time.": ["4bd6b35bc1", 4.8, "crew"], "Instead, ask in plain words: spawn one agent per bug.": ["35f4d419fe", 4.3, "crew"], "These are subagents. Each one takes its own job, works in parallel, and reports back.": ["325356b48b", 5.78, "crew"], "Codex has built-in agents: default, worker and explorer.": ["674d40c6ab", 4.78, "crew"], "Add your own as TOML files in the .codex/agents folder.": ["65d3be310a", 5.21, "crew"], "Subagents use more tokens, so save them for jobs that really are independent.": ["a25df76d01", 5.4, "crew"], "When they all edit files, give each task its own checkout with codex --worktree.": ["e56b51276f", 5.42, "crew"], "Every worktree is its own Git checkout, so parallel edits never collide.": ["037af56837", 5.45, "crew"], "Thursday brings a long job: move the whole test suite to a new runner.": ["910b900829", 4.75, "longhaul"], "Give Codex a finish line it can check, with /goal.": ["ae237e7fd8", 3.6, "longhaul"], "It keeps working toward that goal, step after step, until the condition holds.": ["7580d9b579", 5.23, "longhaul"], "Some tasks don’t need your laptop at all. Codex Cloud runs them remotely.": ["c1984d51b7", 4.82, "longhaul"], "When it’s finished, codex apply brings the changes back to your checkout.": ["3bb8fb5d8c", 4.66, "longhaul"], "And on GitHub, comment @codex review on a pull request, once code review is enabled for the repo.": ["25bd5c50a1", 6.72, "longhaul"], "Friday is for wiring Codex into everything else.": ["124c594c40", 3.94, "plugin"], "MCP servers connect outside tools. Add one with codex mcp add, and check them with /mcp.": ["562bf9b7df", 7.9, "plugin"], "Plugins bundle skills, connectors and MCP servers, so the whole team shares one setup.": ["4be467cd70", 6.89, "plugin"], "Add a marketplace with codex plugin marketplace add, then browse it with /plugins.": ["be79889dc7", 5.98, "plugin"], "Hooks run your own scripts at fixed moments, like before a tool runs or when a session stops.": ["ce6fa94cf1", 5.74, "plugin"], "Here, a PreToolUse hook blocks a dangerous command before it ever runs.": ["e707d32bb1", 4.97, "plugin"], "Hooks live in .codex/hooks.json, and project hooks only run in a trusted project. /hooks shows them.": ["59b7ee830c", 8.9, "plugin"], "For CI and scripts, codex exec runs headless, with JSON events and the last message saved to a file.": ["af964f88c1", 8.42, "plugin"], "And when the week ends, codex resume picks a session back up, and codex fork branches it.": ["056f64bd70", 6.17, "plugin"], "Quick check. Codex must edit files and run tests in the repo, and nothing else. Which sandbox fits?": ["410102b58e", 7.37, "check"], "Right. Workspace-write is exactly enough, and no more.": ["d6efc9f3a8", 4.44, "check"], "It’s workspace-write. Read-only can’t edit, and full access is far too much.": ["3f318c0a17", 5.21, "check"], "The least access that still gets the job done. That’s the habit to keep.": ["2f4dc3cd82", 4.42, "check"]};
+const VO = {"Monday, nine a.m. Ticket SHOP-142 lands: discount codes at checkout.": ["7e36eca3cd", 5.66, "brief"], "Before any code, Codex needs the house rules. Type /init.": ["2fa32893de", 4.97, "brief"], "Codex reads the repo and writes an AGENTS.md: the commands, the conventions, how to test.": ["9c68a0f925", 7.1, "brief"], "Every session reads it: your global file first, then each folder down from the repo root. The closest one wins.": ["80eed07151", 7.92, "brief"], "Next, how much freedom? /permissions offers three choices.": ["0124cb86f0", 4.78, "brief"], "Ask for approval edits and runs commands inside the repo, and asks before going online or outside it.": ["fd8d70ddff", 6.91, "brief"], "Approve for me only stops for actions that look unsafe. Full Access never asks, so keep it for throwaway machines.": ["0caad849fa", 8.09, "brief"], "Last, team know-how. A skill is a folder with a SKILL.md, loaded only when a task needs it.": ["e4268ccac0", 7.01, "brief"], "Call one with a dollar sign, and Codex applies the team rules to this ticket.": ["5e2b8c2e80", 4.99, "brief"], "Tuesday. Time to build, and one prompt asks Codex to split the work.": ["bbb582adb6", 5.3, "build"], "Codex starts a subagent, an explorer, to trace the checkout math.": ["107727bb84", 5.28, "build"], "Each subagent takes one job and reports back. Built-in roles are default, worker and explorer, and your own go in .codex/agents.": ["59367842ad", 9.98, "build"], "With the report in hand, Codex edits two files and adds the tests.": ["2c7e0fd218", 5.09, "build"], "Two tasks editing at once? Start each with codex --worktree, and each gets its own Git checkout.": ["97cb6d659a", 7.2, "build"], "For the docs, give Codex a finish line it can check, with /goal.": ["87fb972a77", 4.61, "build"], "It keeps working until the condition holds: docs written, all eleven tests green.": ["fa0155cb9b", 5.35, "build"], "Wednesday. Before shipping, look at everything that changed. /diff shows it all, untracked files included.": ["df97c8e861", 7.18, "ship"], "Then /review. Pick uncommitted changes, and Codex reviews them the way a colleague would.": ["09b3343dd0", 6.14, "ship"], "Some rules must hold every time, not only when Codex remembers. That is what hooks are for.": ["28864526cd", 6.31, "ship"], "A PreToolUse hook runs before each tool call. This one blocks a force push to main.": ["c092f1ef0b", 5.71, "ship"], "Last, close the loop. MCP servers connect Codex to outside tools, and /mcp lists them.": ["fa3bd7156f", 7.3, "ship"], "With the tracker connected, Codex moves SHOP-142 to Done and links the pull request.": ["0d97cf65ef", 6.26, "ship"], "And plugins bundle skills and MCP servers, so the whole team installs one setup from /plugins.": ["cf52488f03", 7.9, "ship"], "Quick check. Codex should edit files and run tests inside the repo, and ask before anything else. Which permission fits?": ["bd2b8cfa0f", 8.59, "check"], "Right. Ask for approval is the everyday choice.": ["28e331cb16", 3.79, "check"], "It is Ask for approval. Approve for me skips most prompts, and Full Access skips them all.": ["bc7105c194", 5.95, "check"], "The least freedom that still gets the job done. That is the habit to keep.": ["989f8b3b49", 4.51, "check"]};
 /* ============================================================
    core: utilities, director clock, board, narration, voice, UI pieces
    ============================================================ */
@@ -540,7 +609,7 @@ const kc = s => `<span class="kb">${esc(s)}</span>`;
 /* ---------- Board: the docked panel. 'notes' mode for lessons, 'term' mode for command-line stories ---------- */
 const SPIN_GLYPHS = ['·', '✢', '✳', '✶', '✻', '✽', '✻', '✶', '✳', '✢'];
 const Board = (() => {
-  const boardEl = $('#board'), logEl = $('#bd-log'), scrollEl = $('#bd-scroll'), inputWrap = $('#bd-input'), tiText = $('#bi-text'), titleEl = $('#bd-title');
+  const boardEl = $('#board'), logEl = $('#bd-log'), scrollEl = $('#bd-scroll'), inputWrap = $('#bd-input'), tiText = $('#bi-text'), titleEl = $('#bd-title'), footEl = $('#bd-foot');
   const spinners = new Set();
   const scrollDown = () => { scrollEl.scrollTop = scrollEl.scrollHeight; scrollEl.classList.toggle('over', scrollEl.scrollHeight > scrollEl.clientHeight + 2); };
   try { new ResizeObserver(() => scrollDown()).observe(scrollEl); } catch (e) { /* no ResizeObserver */ }
@@ -558,7 +627,9 @@ const Board = (() => {
     el: boardEl,
     title(s) { titleEl.textContent = s; },
     mode(m) { boardEl.classList.toggle('m-notes', m !== 'term'); boardEl.classList.toggle('m-term', m === 'term'); B.cur = m; },
-    reset({ title = '', mode = 'notes', input = false } = {}) { logEl.innerHTML = ''; spinners.clear(); tiText.textContent = ''; B.input(input); B.mode(mode); B.title(title); },
+    reset({ title = '', mode = 'notes', input = false } = {}) { logEl.innerHTML = ''; spinners.clear(); tiText.textContent = ''; footEl.innerHTML = ''; B.input(input); B.mode(mode); B.title(title); },
+    // a status line under the input (model, folder, mode…), as many CLIs show; trusted HTML
+    footer(html) { footEl.innerHTML = html || ''; },
     clear() { logEl.innerHTML = ''; spinners.clear(); },
     input(on) { inputWrap.hidden = !on; },
     raw: (html, cls = '') => add(cls, html),
@@ -622,6 +693,8 @@ const Board = (() => {
       return B.user(s);
     },
     placeholder(s) { B.input(true); tiText.textContent = s; tiText.classList.add('ph'); },
+    // type into the input line without echoing a log entry; returns when typed. Clear with placeholder()
+    typeOnly(s, o = {}) { return B.type(s, { ...o, submit: false }); },
     tick() {
       for (const s of spinners) {
         s.g.textContent = SPIN_GLYPHS[Math.floor(D.t * 9) % SPIN_GLYPHS.length];
@@ -965,13 +1038,17 @@ class Guide {
     this.head = new THREE.Object3D(); this.head.position.set(0, 1.35, 0); root.add(this.head);
     this.st = { eyeY: 1, brow: 0, browY: 0, lookX: 0, lookY: 0, tLookX: 0, tLookY: 0, blink: rand(2, 4), blinkK: 0, walk: 0, wave: 0, typing: 0, bob: rand(0, 6) };
     this.expr = 'neutral'; this.set('neutral');
+    // a story can rebuild the character's look: FILM.guideSkin(guide) may hide the default parts,
+    // add its own meshes, move guide.head, and set guide.onExpr(expr) / guide.onTick(dt, sdt, time)
+    if (typeof FILM !== 'undefined' && FILM.guideSkin) { FILM.guideSkin(this); this.set(this.expr); }
     W.chars.add(this);
   }
   at(x, z, ry = 0) { this.root.position.set(x, this.root.position.y, z); this.root.rotation.y = ry; return this; }
   set(expr) {
     const e = EXPR[expr] || EXPR.neutral; this.expr = expr; this.tgt = e;
-    for (const k in this.mouths) this.mouths[k].visible = k === e.mouth;
+    for (const k in this.mouths) this.mouths[k].visible = k === e.mouth && !this.skinned;
     if (e.look) this.look(...e.look);
+    if (this.onExpr) this.onExpr(expr);
     return this;
   }
   look(x = 0, y = 0) { this.st.tLookX = x; this.st.tLookY = y; return this; }
@@ -1002,7 +1079,7 @@ class Guide {
   tint(color, dur = .6) { const c0 = this.mat.color.clone(), c1 = new THREE.Color(color); return anim(dur, k => this.mat.color.lerpColors(c0, c1, k)); }
   reset() {
     this.root.position.set(0, 0, 0); this.root.rotation.set(0, 0, 0); this.root.scale.setScalar(this.scale); this.root.visible = true;
-    this.body.scale.set(1, 1, 1); this.mat.color.copy(this.color);
+    this.body.scale.set(1, 1, 1); this.mat.color.copy(this.color); if (this.onReset) this.onReset();
     Object.assign(this.st, { walk: 0, wave: 0, typing: 0, point: 0, tLookX: 0, tLookY: 0 });
     this.set('neutral');
   }
@@ -1031,6 +1108,7 @@ class Guide {
       a.rotation.z = lerp(a.rotation.z, rz, k); a.rotation.x = lerp(a.rotation.x, rx, k);
     });
     this.bulb.scale.setScalar(1 + Math.sin(time * 3) * .12);
+    if (this.onTick) this.onTick(dt, sdt, time);
   }
 }
 
@@ -1617,464 +1695,423 @@ const heroCTA = () => `<button data-go="1">${esc(UI.start)}</button><button clas
    story: FILM config + SCENES (inserted by build.py from story.js)
    ============================================================ */
 /* ============================================================
-   story.js — "Codex, Fully Loaded": the features that turn a Codex chat into a crew.
-   One week with the team's Codex on an app called "shop".
-   Facts follow films/codex-features/BRIEF.md (verified 2026-10-14, Codex CLI 0.160).
-   Narration goes through beat()/N()/Narr.set() with plain string literals only.
+   Codex, Fully Loaded — one ticket (SHOP-142), three days, nine features.
+   The board copies the real Codex CLI (reference/codex-tui.md: captured from Codex v0.160.1
+   doing this same ticket in a scratch repo). The mascot is the Codex pet: a blue cloud head
+   with a >_ screen face. Unofficial team explainer; facts as of Codex CLI 0.160, Oct 2026.
    ============================================================ */
 
 const FILM = {
-  id: 'codex-features',
+  id: 'codex-features-v2',
   title: 'Codex, Fully Loaded',
   brand: 'Codex Crew',
   lang: 'en',
-  colors: { hero: 0x6c8cff, heroHi: 0xa9bbff, heroInk: 0x0b1030 },
+  colors: { hero: 0x4d7cff, heroHi: 0xa9c0ff, heroInk: 0x07122e },
   board: { title: '~/shop — codex', mode: 'term' },
   concepts: [
-    ['rules', 'RULE', 'House rules: AGENTS.md and skills'],
-    ['sandbox', 'BOX', 'Sandbox, approvals and review'],
-    ['crew', 'CREW', 'Subagents and worktrees'],
-    ['longhaul', 'GOAL', 'Goals, cloud tasks and PR reviews'],
-    ['plugin', 'PLUG', 'MCP, plugins, hooks and headless runs'],
+    ['mon', 'MON', 'Brief: /init · /permissions · skills'],
+    ['tue', 'TUE', 'Build: subagents · worktrees · /goal'],
+    ['wed', 'WED', 'Ship: /review · hooks · MCP & plugins'],
   ],
   recap: {
-    title: 'Codex, fully loaded',
-    lede: 'Rules it remembers, a sandbox that fits the job, a crew in parallel, a finish line, and your own tools wired in. As of Codex CLI 0.160, October 2026. The row in <b>gold</b> is the habit to keep.',
+    title: 'SHOP-142, start to Done',
+    lede: 'One ticket, three days, nine features. The one in <b>gold</b> is the habit to keep. As of Codex CLI 0.160, October 2026.',
     rows: [
-      ['RULE', 'House rules', '/init writes AGENTS.md; root first, so the closest file wins (32 KiB cap). Skills: SKILL.md folders, loaded only when needed', '/init · $skill-name'],
-      ['BOX', 'Sandbox', 'read-only, workspace-write or danger-full-access; switch with /permissions. Check /diff and /review before committing; --yolo only on throwaway machines', '-s workspace-write', 1],
-      ['CREW', 'Many hands', 'Ask for subagents in plain words (more tokens); custom agents in .codex/agents/*.toml; one worktree per task', 'codex --worktree'],
-      ['GOAL', 'Long haul', 'A checkable /goal; remote tasks with codex cloud exec; @codex review on a PR', '/goal · codex apply'],
-      ['PLUG', 'Plug it in', 'codex mcp add for tools, /plugins from a marketplace, /hooks at fixed moments, headless runs for CI', 'codex exec --json'],
+      ['MON', 'AGENTS.md', 'Standing rules; the closest file wins', '/init'],
+      ['MON', 'Permissions', 'Ask for approval for everyday work', '/permissions', 1],
+      ['MON', 'Skills', 'Team know-how in .agents/skills, loaded when needed', '$skill-name'],
+      ['TUE', 'Subagents', 'Parallel jobs that report back; roles in .codex/agents', 'ask in plain words'],
+      ['TUE', 'Worktrees', 'Each task gets its own Git checkout', 'codex --worktree'],
+      ['TUE', 'Goals', 'A finish line Codex can check', '/goal'],
+      ['WED', 'Review', 'See every change, then review it', '/diff · /review'],
+      ['WED', 'Hooks', 'Your scripts at fixed moments, e.g. PreToolUse', '.codex/hooks.json'],
+      ['WED', 'MCP & plugins', 'Connect tools; share one team setup', '/mcp · /plugins'],
     ],
-    challengeTitle: 'Team challenge',
     challenge: [
-      'Run /init in your repo, then add the one rule your team keeps repeating in chat.',
-      'Turn a workflow you do every week into a skill, and call it with $ and its name.',
-      'Add a PreToolUse hook that blocks one command you never want Codex to run.',
+      'Run /init in your main repo and trim the AGENTS.md it writes to rules you would tell a new teammate.',
+      'Take your next ticket through the same three days: subagent to explore, /goal for the docs, /review before the PR.',
+      'Add one PreToolUse hook the whole team agrees on, and commit it in .codex/hooks.json.',
     ],
+  },
+  // the Codex pet replaces the default block mascot on every character
+  guideSkin: codexPet,
+  world() {
+    Board.el.classList.add('cx');
+    document.querySelector('.bi-caret').textContent = '›';
   },
 };
 
-/* ---------- helpers for this film ---------- */
-const narrowView = () => matchMedia('(max-width: 900px)').matches;
-// a mini guide standing on a pedestal (y = pedestal top)
-function miniOn(color, x, z, y = .3) { const m = mini(color, x, z, { scale: .5, ry: Math.PI / 2 }); m.root.position.y = y; return m; }
-// laptop beside a character that faces +x (ry = PI/2), screen turned toward it, so neither hides the other
-function lapOn(x, z, y = .3) { const l = laptopAt(x + .42, z, -Math.PI / 2); l.position.y = y; return l; }
+/* ---------- the Codex pet: cloud head, >_ screen face, small body ---------- */
+const PET_FACE = { neutral: '>_', focused: '>_', happy: '^_^', proud: '^_^', surprised: 'o_o', worried: '>_<', thinking: '·_·', sad: 'T_T' };
+function codexPet(g) {
+  g.skinned = true;
+  g.body.children.forEach(c => { if (!g.arms.includes(c)) c.visible = false; });
+  const mat = g.mat;                                   // shared tint, so tint() and minis' colors still work
+  mat.roughness = .5; mat.emissive = g.color.clone().multiplyScalar(.28);
+  const pet = new THREE.Group(); g.body.add(pet);
+  // torso with a >_ print
+  mesh(rbox(.46, .34, .34, .13, 3), mat, { y: .37, parent: pet });
+  const chest = canvasTex(128, 64, (c, w, h) => { c.fillStyle = '#d9e2ff'; c.font = `700 40px ${FONT_M}`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText('>_', w / 2, h / 2 + 2); });
+  const cp = new THREE.Mesh(new THREE.PlaneGeometry(.2, .1), new THREE.MeshBasicMaterial({ map: chest, transparent: true, toneMapped: false }));
+  cp.position.set(0, .37, .172); pet.add(cp);
+  // cloud head: one big puff and a ring of smaller ones
+  const head = new THREE.Group(); head.position.y = 1.0; pet.add(head);
+  const big = mesh(sphere(.4, 28, 20), mat, { parent: head }); big.scale.set(1.18, .92, .9);
+  [[-.34, .2, -.02, .25], [.34, .2, -.02, .25], [0, .33, -.04, .27], [-.18, .3, .06, .2], [.18, .3, .06, .2], [-.44, -.08, -.02, .22], [.44, -.08, -.02, .22], [-.3, -.26, 0, .19], [.3, -.26, 0, .19], [0, -.3, 0, .22]]
+    .forEach(([x, y, z, r]) => mesh(sphere(r, 20, 14), mat, { x, y, z, parent: head }));
+  // the screen
+  mesh(rbox(.6, .4, .12, .12, 3), std(0x081026, { rough: .25, metal: .2 }), { y: -.02, z: .36, parent: head });
+  let shown = '', cur = true, curT = 0;
+  const draw = (txt, on) => (c, w, h) => {
+    c.clearRect(0, 0, w, h);
+    c.shadowColor = '#6fa4ff'; c.shadowBlur = 6; c.fillStyle = '#c4dbff';
+    c.textAlign = 'center'; c.textBaseline = 'middle';
+    if (txt === '>_') {                                  // the terminal face: chevron + blinking cursor, drawn apart
+      c.font = `700 104px ${FONT_M}`; c.fillText('>', w * .36, h * .5);
+      if (on) c.fillRect(w * .52, h * .66, w * .2, 13);
+    } else { c.font = `700 84px ${FONT_M}`; c.fillText(txt, w / 2, h / 2 + 4); }
+  };
+  const tex = canvasTex(256, 160, draw('>_', true));
+  const face = new THREE.Mesh(new THREE.PlaneGeometry(.54, .34), new THREE.MeshBasicMaterial({ map: tex, transparent: true, toneMapped: false }));
+  face.position.set(0, -.02, .425); head.add(face);
+  const setFace = () => { const t = PET_FACE[g.expr] || '>_'; if (t !== shown) { shown = t; redraw(tex, draw(t, cur)); } };
+  g.onExpr = () => setFace();
+  // the cursor blinks on real time, like a terminal
+  g.onTick = dt => { curT += dt; if (curT > .53) { curT = 0; cur = !cur; if (shown === '>_') redraw(tex, draw('>_', cur)); } head.rotation.z = Math.sin(performance.now() / 900) * .03; };
+  // shorter arms and legs under the smaller body
+  g.arms.forEach(a => { a.position.set(a.userData.s * .29, .5, 0); a.scale.setScalar(.72); });
+  g.legs.forEach(l => { l.position.x = Math.sign(l.position.x) * .13; l.position.y = .18; l.scale.setScalar(.8); });
+  g.head.position.y = 1.62;
+}
+
+/* ---------- Codex CLI lines (see style.css) ---------- */
+const CX = { model: 'GPT-6-Astra high', cwd: '~/shop', thread: 'SHOP-142 discount codes', badge: '' };
+const cxFooter = () => Board.footer(`<span class="cx-model">${CX.model}</span> · <span class="cx-cwd">${CX.cwd}</span> · <span class="cx-thread">${esc(CX.thread)}</span>${CX.badge ? `<span class="cx-badge">${esc(CX.badge)}</span>` : ''}<div class="cx-hint"><b>←</b> for agents · <b>?</b> for shortcuts</div>`);
+// shell command highlighting, the way Codex colors "• Ran …" lines
+function hl(cmd) {
+  const out = []; let first = true;
+  for (const tok of cmd.match(/'[^']*'|"[^"]*"|&&|\|\||[;|]|\S+/g) || []) {
+    if (/^(;|&&|\|\||\|)$/.test(tok)) { out.push(`<span class="sh-p">${esc(tok)}</span>`); first = true; continue; }
+    const cls = first ? 'sh-c' : /^['"]/.test(tok) ? 'sh-s' : /^-/.test(tok) ? 'sh-f' : 'sh-a';
+    out.push(`<span class="${cls}">${esc(tok)}</span>`); first = false;
+  }
+  return out.join(' ');
+}
+const sub = (lines, cls = '') => [].concat(lines).map((l, i) => `<div class="cx-sub ${cls}"><span class="el">${i ? '&nbsp;' : '└'}</span> ${l}</div>`).join('');
+function cxHeader(perm = 'Ask for approval') {
+  Board.raw(`<div class="cx-hdr"><span class="cx-mark">&gt;_</span> <b>OpenAI Codex</b> <span class="d">(v0.160.1)</span><br><span class="d">&nbsp;&nbsp;&nbsp;${CX.cwd}</span><br>permissions: ${esc(perm)}</div>`);
+  Board.placeholder('Ask Codex to do anything'); cxFooter();
+}
+const cxUser = s => Board.raw(`<span class="chev">›</span>${esc(s)}`, 'cx-user');
+const cxSay = (s, cls = '') => Board.raw(`<span class="dot">•</span><span class="tx">${s}</span>`, 'cx-row ' + cls);
+const cxAgent = (verb, name) => cxSay(`<b>${verb}</b>${name ? ` <span class="cx-agent">\`${esc(name)}\`</span>` : ''}`);
+function cxRan(cmd, out = [], more = 0, cls = 'ok') {
+  return Board.raw(`<div class="cx-row ${cls}"><span class="dot">•</span><span class="tx">Ran ${hl(cmd)}</span></div>${out.length ? sub(out.map(esc), cls === 'err' ? 'err' : '') : ''}${more ? `<div class="cx-more">+ ${more} lines (ctrl+t to expand)</div>` : ''}`);
+}
+// files: [{ p, a, d, rows: [[n, '+'|'-'|' ', code]] }]
+function cxEdited(title, files, more = true) {
+  const body = files.map(f => `<div class="cx-sub"><span class="el">└</span> ${esc(f.p)} (<span class="cx-plus">+${f.a}</span> <span class="cx-minus">-${f.d}</span>)</div>` +
+    (f.rows || []).map(([n, s, code]) => `<div class="r ${s === '+' ? 'add' : s === '-' ? 'del' : ''}"><span class="n">${n}</span><span class="s">${s}</span><span>${esc(code)}</span></div>`).join('')).join('');
+  return Board.raw(`<div class="cx-row ok"><span class="dot">•</span><span class="tx">${title}</span></div><div class="cx-diff">${body}</div>${more ? '<div class="cx-more">+ Show details</div>' : ''}`);
+}
+function cxDone(first, rest = [], worked = '') {
+  return Board.raw(`<div class="cx-row"><span class="dot">•</span><span class="tx">${first}</span></div>${rest.map(r => `<div class="cx-body">${r}</div>`).join('')}${worked ? `<div class="cx-worked">Worked for ${worked}</div>` : ''}`);
+}
+// live "• Working (Ns • esc to interrupt)" line on the scene clock; returns { stop }
+function cxWorking() {
+  const el = Board.raw('<span class="dot">•</span><span class="tx"></span>', 'cx-row cx-work');
+  const tx = el.querySelector('.tx'), t0 = D.t, tok = D.token; let on = true;
+  run(async () => { while (on && D.token === tok) { tx.innerHTML = `Working (${Math.max(1, Math.floor(D.t - t0))}s • <b>esc</b> to interrupt)`; await wait(.25); } });
+  return { stop() { on = false; el.remove(); } };
+}
+// type into the composer like a person, then post it as a user message
+async function cxType(s, cps = 38) { await Board.typeOnly(s, { cps }); await wait(.25); Board.placeholder('Ask Codex to do anything'); return cxUser(s); }
+function cxMenu(title, opts, sel = 0, hint = 'enter select · esc back') {
+  return Board.raw(`<div class="t">${esc(title)}</div>${opts.map(([l, ds], i) => `<div class="o${i === sel ? ' sel' : ''}"><span class="l">${i === sel ? '›' : '&nbsp;'} ${i + 1}. ${esc(l)}</span><span class="ds">${esc(ds || '')}</span></div>`).join('')}<div class="h">${esc(hint)}</div>`, 'cx-menu');
+}
+const cxMarker = s => Board.raw(esc(s), 'cx-marker');
+
+/* ---------- props for this film ---------- */
+function ticketCard(done = false) {
+  return makeCard({ w: 2, h: 1.3, d: .06, res: 1024, draw: cardDraw({ kicker: 'SHOP-142', title: 'Discount codes at checkout', lines: ['SAVE10 · 10% off', 'FREESHIP · no shipping', 'unknown codes rejected'], accent: '#5b78f2', done, tSize: 70, lSize: 38 }) });
+}
+function fileCard(title, lines, accent = '#5b78f2', w = 1.6, h = 1.1) {
+  return makeCard({ w, h, d: .05, res: 1024, draw: cardDraw({ kicker: 'file', title, lines, accent, tSize: 76, lSize: 40 }) });
+}
+function gate(label, color) {
+  const g = new THREE.Group();
+  const p = makePedestal({ r: .5, h: .22, trim: color }); g.add(p);
+  const ring = makeRing(color, .62); ring.position.y = .2; ring.scale.setScalar(.85); g.add(ring);
+  g.userData.ring = ring; g.userData.label = label;
+  return g;
+}
+function shield(color = 0x9fb3ff) {
+  const g = new THREE.Group();
+  const m = mesh(new THREE.CircleGeometry(.9, 6), glow(color, .9, { transparent: true, opacity: .22, depthWrite: false, side: THREE.DoubleSide }), { y: 1.1, parent: g, cast: false });
+  const rim = mesh(torus(.9, .03, 6, 6), glow(color, 2), { y: 1.1, parent: g, cast: false });
+  rim.rotation.z = Math.PI / 6; m.rotation.z = Math.PI / 6;
+  g.userData.face = m;
+  return g;
+}
+const narrow = () => matchMedia('(max-width: 900px)').matches;
 
 const SCENES = [
 /* ======================= 00 · title ======================= */
 {
   id: 'start', num: '00', group: 'INTRO', hero: true, hold: true, dock: false, sky: 'dusk', dur: 30,
   name: 'Codex, Fully Loaded',
-  title: 'Codex,<br>Fully Loaded', eyebrow: 'A six-minute film for teams who already chat with Codex',
-  sub: 'Rules, sandboxes, parallel agents, goals, cloud and hooks: the features that turn a chat into a crew.',
-  blurb: 'One week, one app, and the features that turn a chat into a crew.',
+  title: 'Codex,<br>Fully Loaded', eyebrow: 'One ticket · three days · nine features',
+  sub: 'Follow SHOP-142, a discount-code ticket, from the first prompt to Done, and meet the Codex features that carry it.',
+  blurb: 'Meet the pet, and the ticket.',
   setup() {
-    const c = W.guide; c.at(-1.1, .3, .35); c.set('focused'); c.typing = 1;
-    S.lap = laptopAt(-1.1 + .26, .3 + .5, Math.PI + .35);
-    S.crew = [[1, -1.1, 0x6fe3d0], [2.1, -.2, 0xf2c46d], [1.3, .9, 0xab9cff]].map(([x, z, col]) => { const m = mini(col, x, z, { scale: .42, hidden: false, ry: Math.PI / 2 }); m.typing = 1; lapOn(x - .04, z, 0); return m; });
-    if (narrowView()) Cam.set([4.6, 2.3, 7.2], [.3, .4, 0]);
-    else Cam.set([3.6, 2, 8], [-1.2, .9, 0]);
+    const c = W.guide; c.at(0, 0, 0); c.typing = 1; c.set('focused');
+    S.t = add(ticketCard(), 1.7, 0, -1.6); S.t.rotation.y = -.35;
+    if (narrow()) Cam.set([3.6, 2.1, 6.6], [.4, .6, -.4]); else Cam.set([3.2, 1.8, 7.6], [-1.3, 1.0, -.3]);
   },
   async run() {
     Narr.set('');
-    run(async () => { for (;;) { await wait(rand(3, 5)); W.guide.typing = 0; W.guide.look(.5, .3); await wait(1.4); W.guide.look(0, 0); W.guide.typing = 1; } });
-    for (;;) { await Cam.orbit(-18, 12); await Cam.orbit(18, 12); }
+    run(async () => { const c = W.guide; for (;;) { await wait(rand(3.5, 5.5)); c.typing = 0; c.set('happy'); c.look(.4, .3); await wait(1.4); c.set('focused'); c.typing = 1; } });
+    for (;;) { await Cam.orbit(-20, 12); await Cam.orbit(20, 12); }
   },
 },
 
-/* ======================= 01 · house rules ======================= */
+/* ======================= 01 · Monday: brief ======================= */
 {
-  id: 'rules', num: '01', group: 'MONDAY', chip: ['MON', '09:04'], sky: 'dawn', dur: 65, concept: 'rules',
-  name: 'House Rules', title: 'House Rules', eyebrow: 'Part 1 · Monday', sub: 'Tell Codex once, not every morning.',
-  blurb: '/init writes AGENTS.md, the closest file wins, and skills hold your workflows.',
+  id: 'brief', num: '01', group: 'MONDAY', chip: ['MON', '09:00'], sky: 'dawn', dur: 66, concept: 'mon',
+  name: 'Monday: Brief Codex', title: 'Monday:<br>Brief Codex', eyebrow: 'AGENTS.md · permissions · skills', sub: 'Rules, freedom and know-how, before a line of code.',
+  blurb: 'SHOP-142 arrives. /init writes AGENTS.md, /permissions sets the freedom, a skill brings team know-how.',
   setup() {
-    const c = W.guide; c.at(-2.6, .9, .45);
-    S.card = add(makeCard({ w: 1.7, h: 1.25, draw: cardDraw({ kicker: 'shop/', title: 'AGENTS.md', lines: ['build: npm run build', 'test: npm test', 'never edit vendor/'], tSize: 84, lSize: 46 }) }), -.2, 0, -.9);
-    S.card.visible = false;
-    S.sub = add(makeCard({ w: 1.15, h: .85, draw: cardDraw({ kicker: 'shop/web/', title: 'AGENTS.md', lines: ['closest file wins'], tSize: 92, lSize: 54 }) }), 1.55, 0, -.35);
-    S.sub.rotation.y = -.25; S.sub.visible = false;
-    S.books = add(makeStack(5, { colors: [HERO, SIGNAL, GOLD] }), 2.7, 0, .7);
-    S.books.scale.setScalar(.001); S.books.visible = false;
-    if (narrowView()) Cam.set([1, 3.8, 12.8], [-.4, .9, -.2]);
-    else Cam.set([1.8, 3.4, 11.6], [-.3, 1, -.2]);
+    const c = W.guide; c.at(-2.4, .5, .55); c.typing = 0;
+    S.ticket = add(ticketCard(), -.4, 6, -1.4); S.ticket.rotation.y = .2;
+    S.agents = add(fileCard('AGENTS.md', ['build: npm test', 'style: ES modules', 'tests for every rule']), .9, 0, -.2); S.agents.rotation.y = -.15; S.agents.scale.setScalar(.001);
+    S.sub = add(fileCard('AGENTS.md', ['src/checkout/', 'money in cents'], '#8fa3ff', 1.1, .8), 2.1, 0, .5); S.sub.rotation.y = -.35; S.sub.scale.setScalar(.001);
+    S.gates = [['Ask for approval', OKC], ['Approve for me', GOLD], ['Full Access', BAD]].map(([l, col], i) => { const g = add(gate(l, col), -1.2 + i * 1.5, 0, 2.0); g.scale.setScalar(.001); return g; });
+    S.books = add(makeStack(5, { colors: [0x5b78f2, SIGNAL] }), -3.4, 0, -1.6); S.books.scale.setScalar(.001);
+    Cam.set([3.6, 3.4, 10.8], [-.4, .9, .2]);
   },
   async run() {
     const c = W.guide;
+    cxHeader();
     await until(2.4);
-    await beat('Monday. The team opens Codex on the shop app, and it knows nothing about the project yet.', async () => {
-      c.set('thinking'); bubble(c, 'Which test command?', 2.6, 'think');
-      Board.say('Monday: Codex meets the [o]shop[/] repo');
+    await beat('Monday, nine a.m. Ticket SHOP-142 lands: discount codes at checkout.', async () => {
+      await drop(S.ticket, 0, { h: 6, dur: .6 }); Cam.shake(.15); FX.burst([-.4, .1, -1.4], { n: 18 });
+      c.typing = 0; c.set('surprised'); await c.face({ x: -.4, z: -1.4 }, .4); bubble(c, 'SHOP-142!', 1.8);
     });
-    await beat('Type <code>/init</code>, and Codex writes a starter <em>AGENTS.md</em> for the repo.', async () => {
-      await Board.type('/init');
-      const h = Board.tool('Write', 'AGENTS.md');
-      drop(S.card, 0); await wait(.5); Cam.shake(.12);
-      FX.burst([-.2, .3, -.9], { n: 14 });
-      tag(S.card, '<span class="dot" style="color:var(--hero)"></span>AGENTS.md', [0, 1.55, 0], 'tag big');
-      h.ok('[g]Wrote[/] AGENTS.md · build, test and style rules');
+    await beat('Before any code, Codex needs the house rules. Type <code>/init</code>.', async () => {
+      c.set('focused'); await c.face(.55, .4); c.typing = 0;
+      await cxType('/init');
+    });
+    await beat('Codex reads the repo and writes an <em>AGENTS.md</em>: the commands, the conventions, how to test.', async () => {
+      const w = cxWorking();
+      cxRan('git status --short; cat package.json src/checkout/cart.js src/checkout/checkout.js', ['- Unknown codes are rejected with a clear error.', '- Free-shipping threshold uses the subtotal before the discount.'], 23);
+      await wait(2.2); w.stop();
+      cxDone('Created AGENTS.md after confirming it did not exist.', ['The 315-word guide covers repository structure, commands, coding conventions, testing, and commit/PR guidance. npm test passes.'], '42s • 9:02 AM');
+      await grow(S.agents, .6); tag(S.agents, '<span class="dot" style="color:var(--hero-hi)"></span>repo root', [0, 1.35, 0]);
+    });
+    await beat('Every session reads it: your global file first, then each folder down from the repo root. The closest one wins.', async () => {
+      await wait(1.6); await grow(S.sub, .5); tag(S.sub, 'src/checkout · wins here', [0, 1.0, 0], 'tag hero');
+      send([.9, 1.2, -.2], [2.1, .9, .5], { color: 0x8fa3ff, r: .07 });
+    });
+    await beat('Next, how much freedom? <code>/permissions</code> offers three choices.', async () => {
+      await cxType('/permissions');
+      cxMenu('Update Model Permissions', [['Ask for approval', 'Read and edit workspace files and run commands, with approval for internet access or edits outside the workspace'], ['Approve for me', 'Only ask for actions detected as potentially unsafe'], ['Full Access', 'Codex can edit files outside this workspace and access the internet without approval']], 0);
+      Cam.to([3.2, 3.6, 11.6], [-.2, .6, 1.2], 3, E.inOutSine);
+      for (const g of S.gates) { grow(g, .5); tag(g, esc(g.userData.label), [0, 1.65, 0]); await wait(.35); }
+    });
+    await beat('Ask for approval edits and runs commands inside the repo, and asks before going online or outside it.', async () => {
+      await c.walk(-1.2, 1.4, 1.2); c.set('happy'); FX.ring([-1.2, .25, 2.0], OKC);
+    });
+    await beat('Approve for me only stops for actions that look unsafe. Full Access never asks, so keep it for throwaway machines.', async () => {
+      FX.ring([.3, .25, 2.0], GOLD); await wait(2.4);
+      c.set('worried'); Cam.shake(.2); FX.burst([1.8, .6, 2.0], { n: 20, colors: [BAD, CREAM] });
+    });
+    await beat('Last, team know-how. A skill is a folder with a <code>SKILL.md</code>, loaded only when a task needs it.', async () => {
+      c.set('neutral'); await c.walk(-2.6, -.6, 1.1);
+      await grow(S.books, .5); tag(S.books, '.agents/skills/checkout-rules', [0, .8, 0]);
+      Cam.to([3.6, 3.4, 10.8], [-.6, .9, -.2], 3, E.inOutSine);
+    });
+    await beat('Call one with a dollar sign, and Codex applies the team rules to this ticket.', async () => {
+      await cxType('$checkout-rules check SHOP-142 before we start');
+      cxSay('Using checkout-rules: discounts apply before shipping is checked, and every rule needs a test.');
+      c.set('happy'); c.hop(.3, .4);
+    });
+    await wait(1.5);
+  },
+},
+
+/* ======================= 02 · Tuesday: build ======================= */
+{
+  id: 'build', num: '02', group: 'TUESDAY', chip: ['TUE', '10:30'], sky: 'day', dur: 50, concept: 'tue',
+  name: 'Tuesday: Build It', title: 'Tuesday:<br>Build It', eyebrow: 'subagents · worktrees · /goal', sub: 'Split the work, keep it apart, give it a finish line.',
+  blurb: 'An explorer subagent maps checkout, Codex edits and tests, worktrees keep parallel work apart, /goal finishes the docs.',
+  setup() {
+    const c = W.guide; c.at(-2.2, .6, .5); c.typing = 0;
+    S.files = [[.4, -1.6], [1.4, -1.2], [2.2, -.4]].map(([x, z], i) => add(makeStack(4 + i, { colors: [0x5b78f2, SIGNAL] }), x, 0, z));
+    S.mini = mini(SIGNAL, -1.2, .1, { scale: .5 });
+    S.trees = [[-1.4, 1.9, VIOLET], [.6, 1.9, GOLD]].map(([x, z, col]) => { const g = add(gate('worktree', col), x, 0, z); g.scale.setScalar(.001); return g; });
+    S.tank = add(makeTank({ color: 0x5b78f2 }), 2.4, 0, 1.2); S.tank.userData.set(0); S.tank.visible = false;
+    Cam.set([3.8, 3.4, 10.8], [-.2, .9, 0]);
+  },
+  async run() {
+    const c = W.guide, m = S.mini;
+    CX.thread = 'Implement SHOP-142'; CX.badge = ''; cxHeader();
+    await until(2.4);
+    await beat('Tuesday. Time to build, and one prompt asks Codex to split the work.', async () => {
+      await cxType('Implement SHOP-142. First spawn one explorer subagent to map how checkout totals are computed, then implement it and add tests for every rule.', 60);
+    });
+    await beat('Codex starts a subagent, an explorer, to trace the checkout math.', async () => {
+      cxSay('I’ll first spawn one explorer to trace checkout totals. After it reports back, I’ll implement SHOP-142.');
+      cxAgent('Started', '/root/explore_checkout');
+      await popIn(m); bubble(m, 'explorer', 1.6);
+      for (const f of S.files) { await m.walk(f.position.x - .5, f.position.z + .5, .9); send(f.position.clone().setY(.6), [m.root.position.x, .7, m.root.position.z], { color: SIGNAL, r: .06, h: .6, dur: .6 }); await wait(.4); }
+    });
+    await beat('Each subagent takes one job and reports back. Built-in roles are default, worker and explorer, and your own go in <code>.codex/agents</code>.', async () => {
+      cxAgent('Waiting for agents');
+      await m.walk(-1.5, .4, 1.4);
+      send([-1.5, .7, .4], [-2.2, 1.2, .6], { color: SIGNAL, r: .1 });
+      cxAgent('Completed', '/root/explore_checkout');
+      await wait(.6); await poof(m);
+    });
+    await beat('With the report in hand, Codex edits two files and adds the tests.', async () => {
+      c.set('focused');
+      const w = cxWorking(); await wait(1.6); w.stop();
+      cxEdited('Edited 2 files (<span class="cx-plus">+60</span> <span class="cx-minus">-3</span>)', [
+        { p: 'src/checkout/checkout.js', a: 8, d: 2, rows: [[4, '+', '  const { discountCode } = cart;'], [5, '+', "  if (discountCode && !['SAVE10', 'FREESHIP'].includes(discountCode)) {"]] },
+        { p: 'test/checkout.test.js', a: 52, d: 1, rows: [[7, '-', '  assert.equal(r.total, 60);'], [7, '+', '  assert.deepEqual(r, { subtotal: 60, shipping: 0, total: 60 });']] },
+      ]);
+      cxRan('npm test; git diff --stat', ['src/checkout/checkout.js | 10 +++++++--', 'test/checkout.test.js    | 53 ++++++++++++++++'], 23);
       c.set('happy');
     });
-    await beat('It holds your standing rules: how to build, how to test, and what never to touch.', async () => {
-      Board.code(['# AGENTS.md', '- Build with [t]npm run build[/]', '- Run [t]npm test[/] before you finish', ['- Never edit vendor/', 'mark']], { title: 'shop/AGENTS.md' });
-    });
-    await beat('Codex reads a global file in your home folder first, then one per folder from the Git root down to where you are.', async () => {
-      drop(S.sub, 0); await wait(.5);
-      tag(S.sub, 'shop/web/', [0, 1.15, 0], 'tag');
-      Board.out(['[d]1[/] ~/.codex/AGENTS.md  [d](or AGENTS.override.md)[/]', '[d]2[/] shop/AGENTS.md', '[d]3[/] shop/web/AGENTS.md  [d]← you are here[/]']);
-      c.look(.5, .2);
-    });
-    await beat('They are joined root first, so the closest file wins. Together they are capped at 32 KiB.', async () => {
-      FX.ring([1.55, .05, -.35], HERO, { r1: 1.2 });
-      Board.out(['joined root first → [o]closest file wins[/] · cap [y]32 KiB[/]']);
-    });
-    await beat('For a workflow you repeat, write a <em>skill</em>: a folder with a SKILL.md that has a name and a description.', async () => {
-      c.set('focused');
-      await grow(S.books, .6);
-      tag(S.books, 'skills', [0, .75, 0], 'tag');
-      Board.code(['---', 'name: [t]release-notes[/]', 'description: Draft release notes from merged PRs', '---'], { title: '.agents/skills/release-notes/SKILL.md' });
-    });
-    await beat('Team skills live in the repo under .agents/skills, and personal ones under the same folder in your home.', async () => {
-      Board.out(['repo  [t].agents/skills/[/]', 'user  [t]~/.agents/skills/[/]']);
-      spinY(S.books, .5, 1.2);
-    });
-    await beat('Call one with a dollar sign and its name, like <code>$release-notes</code>, or pick it from <code>/skills</code>.', async () => {
-      tag(S.books, '<b>$release-notes</b>', [0, 1.15, 0], 'tag hero');
-      await Board.type('$release-notes for this week');
-      send([2.7, .6, .7], [-2.6, 1.2, .9], { color: GOLD, h: 1.2 });
-      Board.did('Skill', 'release-notes', '[g]loaded[/] · SKILL.md');
-    });
-    await beat('A skill loads only when it is needed, so a big library stays cheap.', async () => {
-      c.set('proud'); c.hop(.3, .42);
-      if (!narrowView()) Cam.to([1.6, 3, 10.4], [-.3, .9, -.1], 4, E.inOutSine);
-    });
-    await wait(1.2);
-  },
-},
-
-/* ======================= 02 · sandbox ======================= */
-{
-  id: 'sandbox', num: '02', group: 'TUESDAY', chip: ['TUE', '10:30'], sky: 'day', dur: 63, concept: 'sandbox',
-  name: 'The Sandbox', title: 'The Sandbox', eyebrow: 'Part 2 · Tuesday', sub: 'How far may Codex act?',
-  blurb: 'Three sandbox modes, /permissions, auto-review, and checking the diff before you commit.',
-  setup() {
-    const c = W.guide; c.at(-3.5, 1.3, .6);
-    S.peds = [[-2.4, OKC, 'read-only'], [0, SIGNAL, 'workspace-write'], [2.4, BAD, 'danger-full-access']].map(([x, trim, name], i) => {
-      const p = add(makePedestal({ r: .75, trim }), x, 0, -.5);
-      tag(p, name, [0, narrowView() && i === 1 ? 2 : .3, 1.05], i === 2 ? 'tag warn' : 'tag');   // phones: lift the middle tag so the three don't collide
-      return p;
-    });
-    S.lock = add(lockIcon(), 0, 1.05, -.5); S.lock.scale.setScalar(2.2);
-    S.stamp = add(makeStamp('REVIEWED', '#2f8f5b', 2.4, .85)); S.stamp.position.set(0, 3, .9); S.stamp.visible = false;
-    if (narrowView()) Cam.set([0, 4.2, 13.2], [-.3, .8, -.2]);
-    else Cam.set([1, 3.8, 12.6], [-.2, .8, -.2]);
-  },
-  async run() {
-    const c = W.guide;
-    await until(2.4);
-    await beat('Tuesday. Before Codex touches anything, decide how far it may act. That is the <em>sandbox</em>.', async () => {
-      Board.say('Tuesday: pick the [o]sandbox[/]');
-      c.set('thinking'); c.look(.6, 0);
-    });
-    await beat('Read-only lets it look around and answer, but not change a file.', async () => {
-      await c.walk(-2.4, .6, 1.2); c.set('neutral');
-      FX.ring([-2.4, .32, -.5], OKC, { r1: 1.1 });
-      Board.out(['[g]read-only[/]        look and answer, no edits']);
-    });
-    await beat('Workspace-write lets it edit files and run commands inside your project.', async () => {
-      await c.walk(0, .6, 1.2); c.set('happy');
-      await unlockIcon(S.lock);
-      Board.out(['[t]workspace-write[/]  edit and run inside the project']);
-    });
-    await beat('Danger full access takes the walls away completely.', async () => {
-      await c.walk(1.4, 1, 1); c.set('worried');
-      Cam.shake(.35); FX.burst([2.4, .5, -.5], { n: 26, colors: [BAD, 0xff9a7a], speed: 1.6, up: 1.4 });
-      FX.ring([2.4, .32, -.5], BAD, { r1: 1.6 });
-      Board.out(['[r]danger-full-access[/] no limits at all']);
-    });
-    await beat('Pick one with the s flag when you start, or switch in the middle of a session with <code>/permissions</code>.', async () => {
-      await c.walk(0, .9, 1); c.set('focused');
-      Board.shellLine('~/shop', 'codex -s workspace-write');
-      await Board.type('/permissions');
-      Board.out(['  read-only', '[t]❯ workspace-write[/]', '  danger-full-access']);
-    });
-    await beat('Tired of approval prompts? With <code>--approve-for-me</code>, a reviewer model answers eligible requests for you.', async () => {
-      bubble(c, 'Fewer prompts', 2.4, 'good');
-      Board.shellLine('~/shop', 'codex --approve-for-me');
-      Board.out(['[d]eligible approval requests → reviewer model[/]']);
-    });
-    await beat('The full bypass flag, nicknamed yolo, is not recommended. Keep it for throwaway machines.', async () => {
-      Board.out(['[r]--dangerously-bypass-approvals-and-sandbox[/]  [d](alias --yolo)[/]', '[d]throwaway machines only[/]']);
-      FX.spark([2.4, 1.2, -.5], BAD);
-    });
-    await beat('Before you commit, <code>/diff</code> shows every change, untracked files included.', async () => {
-      await Board.type('/diff');
-      Board.out(['[g]M[/] src/cart.ts', '[g]M[/] src/cart.test.ts', '[y]?[/] src/coupon.ts  [d](untracked)[/]']);
-    });
-    await beat('Then <code>/review</code> has Codex review that diff, the way a colleague would.', async () => {
-      await Board.type('/review');
-      const h = Board.tool('Review', 'working tree');
-      await slam(S.stamp, 3, 1.5);
-      h.ok(['[y]1 finding[/] · coupon.ts: expiry check uses local time', '[g]tests cover the cart change[/]']);
-      c.set('proud');
-    });
-    await beat('Outside a session, <code>codex review --base main</code> does the same from your shell.', async () => {
-      Board.shellLine('~/shop', 'codex review --base main');
-      if (!narrowView()) Cam.to([.8, 3.4, 11.4], [-.2, .9, -.2], 4, E.inOutSine);
-    });
-    await wait(1.2);
-  },
-},
-
-/* ======================= 03 · many hands ======================= */
-{
-  id: 'crew', num: '03', group: 'WEDNESDAY', chip: ['WED', '14:00'], sky: 'afternoon', dur: 49, concept: 'crew',
-  name: 'Many Hands', title: 'Many Hands', eyebrow: 'Part 3 · Wednesday', sub: 'Three bugs, three agents, three checkouts.',
-  blurb: 'Subagents in plain words, built-in and custom agents, and a worktree per task.',
-  setup() {
-    const c = W.guide; c.at(-3, 1.4, .5);
-    S.spots = [[-1.3, -1, SIGNAL], [.6, -1.6, GOLD], [2.5, -1, VIOLET]];
-    S.peds = S.spots.map(([x, z, col]) => add(makePedestal({ r: .62, trim: col }), x, 0, z));
-    S.minis = S.spots.map(([x, z, col]) => miniOn(col, x, z));
-    S.laps = [];
-    if (narrowView()) Cam.set([.4, 4.2, 13.6], [-.3, .8, -.4]);
-    else Cam.set([1.2, 3.8, 12.4], [-.3, .8, -.4]);
-  },
-  async run() {
-    const c = W.guide;
-    await until(2.4);
-    await beat('Wednesday. Three bugs land at once. One agent would fix them one at a time.', async () => {
-      Board.say('Wednesday: bugs [r]#41[/] [r]#42[/] [r]#43[/]');
-      c.set('worried'); bubble(c, 'Three at once?', 2.4, 'alert');
-    });
-    await beat('Instead, ask in plain words: spawn one agent per bug.', async () => {
-      c.set('focused');
-      await Board.type('Spawn one agent per bug, #41, #42 and #43, and report back.');
-      for (const m of S.minis) { popIn(m); await wait(.35); }
-    });
-    await beat('These are <em>subagents</em>. Each one takes its own job, works in parallel, and reports back.', async () => {
-      S.minis.forEach((m, i) => { const [x, z] = S.spots[i]; send([-3, 1.2, 1.4], [x, .9, z], { color: S.spots[i][2], h: 1.4, dur: 1 }); m.typing = 1; S.laps.push(lapOn(x, z)); });
-      const hs = ['#41', '#42', '#43'].map(b => Board.tool('Agent', 'fix bug ' + b));
-      await wait(2.2);
-      S.minis.forEach((m, i) => { const [x, z] = S.spots[i]; send([x, .9, z], [-3, 1.2, 1.4], { color: S.spots[i][2], h: 1.2, dur: 1 }); });
-      await wait(1.1);
-      hs.forEach(h => h.ok('[g]done[/] · reported back'));
-      c.set('happy');
-    });
-    await beat('Codex has built-in agents: default, worker and explorer.', async () => {
-      S.names = ['default', 'worker', 'explorer'].map((n, i) => tag(S.minis[i].head, n, [0, .25, 0], 'tag'));
-      Board.out(['built-in: [t]default[/] · [t]worker[/] · [t]explorer[/]']);
-    });
-    await beat('Add your own as TOML files in the .codex/agents folder.', async () => {
-      Board.code(['name = [t]"reviewer"[/]', 'description = [t]"Reviews diffs for the shop app"[/]'], { title: '.codex/agents/reviewer.toml' });
-    });
-    await beat('Subagents use more tokens, so save them for jobs that really are independent.', async () => {
-      c.set('thinking'); c.look(.4, .3);
-      Board.out(['[y]more tokens[/] → only for independent jobs']);
-    });
-    await beat('When they all edit files, give each task its own checkout with <code>codex --worktree</code>.', async () => {
-      c.set('focused');
+    await beat('Two tasks editing at once? Start each with <code>codex --worktree</code>, and each gets its own Git checkout.', async () => {
       Board.shellLine('~/shop', 'codex --worktree');
-      S.names.forEach((L, i) => L.set('worktree ' + (i + 1)));
-      S.spots.forEach(([x, z, col]) => FX.ring([x, .32, z], col, { r1: 1 }));
+      Cam.to([3.4, 3.6, 11.4], [-.4, .7, 1.0], 3, E.inOutSine);
+      for (const g of S.trees) { grow(g, .5); await wait(.3); }
+      tag(S.trees[0], 'checkout', [0, 1.65, 0]); tag(S.trees[1], 'docs', [0, 1.65, 0]);
     });
-    await beat('Every worktree is its own Git checkout, so parallel edits never collide.', async () => {
-      c.set('proud'); c.hop(.3, .42);
-      Board.out(['[g]3 checkouts · 0 collisions[/]']);
-      if (!narrowView()) Cam.to([1, 3.2, 10.8], [-.3, .8, -.4], 4, E.inOutSine);
+    await beat('For the docs, give Codex a finish line it can check, with <code>/goal</code>.', async () => {
+      await cxType('/goal docs/checkout.md documents SAVE10 and FREESHIP with one example each, and npm test passes', 70);
+      Board.raw('<div class="cx-row cx-goal"><span class="dot">•</span><span class="tx">Goal active <span class="o">Objective: docs/checkout.md documents SAVE10 and FREESHIP with one example each, and npm test passes</span></span></div>');
+      S.tank.visible = true; grow(S.tank, .5);
+      S.meter = tag(S.tank, 'goal · working…', [0, 2.0, 0]);
+      S.tank.userData.to(.7, 3.5);
     });
-    await wait(1.2);
+    await beat('It keeps working until the condition holds: docs written, all eleven tests green.', async () => {
+      cxEdited('Added docs/checkout.md (<span class="cx-plus">+43</span> <span class="cx-minus">-0</span>)', [{ p: 'docs/checkout.md', a: 43, d: 0, rows: [[1, '+', '# Checkout discount codes']] }]);
+      await S.tank.userData.to(1, 1.2);
+      S.meter.set('<span style="color:var(--ok)">✓</span> goal achieved · 23s');
+      cxDone('Added docs/checkout.md documenting SAVE10 and FREESHIP, with one example each.', ['All 11 tests pass with npm test. Goal completed in 23 seconds.'], '29s • 10:41 AM');
+      CX.badge = 'Goal achieved (23s)'; cxFooter();
+      FX.burst([2.4, 1.8, 1.2], { n: 24 }); c.set('proud'); c.hop(.3, .4);
+    });
+    await wait(1.5);
   },
 },
 
-/* ======================= 04 · the long haul ======================= */
+/* ======================= 03 · Wednesday: ship ======================= */
 {
-  id: 'longhaul', num: '04', group: 'THURSDAY', chip: ['THU', '09:00'], sky: 'day', dur: 37, concept: 'longhaul',
-  name: 'The Long Haul', title: 'The Long Haul', eyebrow: 'Part 4 · Thursday', sub: 'A finish line, a remote run, a review on the PR.',
-  blurb: '/goal for long work, Codex Cloud with codex apply, and @codex review on pull requests.',
+  id: 'ship', num: '03', group: 'WEDNESDAY', chip: ['WED', '15:00'], sky: 'afternoon', dur: 54, concept: 'wed',
+  name: 'Wednesday: Ship It', title: 'Wednesday:<br>Ship It', eyebrow: '/review · hooks · MCP & plugins', sub: 'Check it, guard it, close the loop.',
+  blurb: '/diff and /review check the work, a hook blocks a risky command, MCP moves the ticket to Done.',
   setup() {
-    const c = W.guide; c.at(-2.9, 1.2, .5);
-    S.tank = add(makeTank({ r: .5, h: 1.7, color: HERO }), -1.1, 0, -.6);
-    S.goal = tag(S.tank, 'goal · tests pass <b>0%</b>', [0, 2.2, 0], 'tag');
-    S.ring = add(makeRing(SIGNAL, .7), .8, 2.3, -2.2); S.ring.scale.setScalar(.001); S.ring.visible = false;
-    S.pr = add(makeCard({ w: 1.6, h: 1.05, draw: cardDraw({ kicker: 'Pull request', title: 'Move tests to new runner', lines: ['shop · 14 files'], tSize: 74, lSize: 44 }) }), 1.9, 0, .4);
-    S.pr.rotation.y = -.3; S.pr.visible = false;
-    S.stamp = add(makeStamp('REVIEWED', '#2f8f5b', 1.6, .56)); S.stamp.position.set(1.9, 3, .7); S.stamp.rotation.y = -.3; S.stamp.visible = false;
-    if (narrowView()) Cam.set([.2, 3.9, 13.8], [-.5, 1.3, -.3]);
-    else Cam.set([1, 3.6, 12.4], [-.4, 1.3, -.3]);
+    const c = W.guide; c.at(-2.3, .5, .5); c.typing = 0;
+    S.pr = add(makeCard({ w: 1.8, h: 1.2, d: .06, res: 1024, draw: cardDraw({ kicker: 'pull request', title: 'SHOP-142: discount codes', lines: ['shop · 3 files', '+103 −3'], accent: '#5b78f2', tSize: 70, lSize: 40 }) }), -.2, 0, -1.3); S.pr.rotation.y = .15;
+    S.stamp = makeStamp('REVIEWED', '#2f8f5b', 1.8, .62); S.stamp.visible = false; add(S.stamp, -.2, 3, -1.1);
+    S.shield = add(shield(), 1.2, 0, .9); S.shield.scale.setScalar(.001);
+    S.sign = add(makeSign('TRACKER', { color: 0x5b78f2, w: 1.5 }), 3.0, 0, -2.1); S.sign.scale.setScalar(.001);
+    S.ticket = add(ticketCard(true), 2.2, 0, 1.3); S.ticket.rotation.y = -.5; S.ticket.scale.setScalar(.001);
+    Cam.set([3.8, 3.4, 10.8], [-.2, .9, -.2]);
   },
   async run() {
     const c = W.guide;
+    CX.thread = 'Implement SHOP-142'; CX.badge = ''; cxHeader();
     await until(2.4);
-    await beat('Thursday brings a long job: move the whole test suite to a new runner.', async () => {
-      Board.say('Thursday: migrate the test suite');
-      c.set('thinking');
+    await beat('Wednesday. Before shipping, look at everything that changed. <code>/diff</code> shows it all, untracked files included.', async () => {
+      await cxType('/diff');
+      cxEdited('src/checkout/checkout.js', [{ p: '@@ -1,7 +1,13 @@', a: 6, d: 2, rows: [[4, '+', '  const { discountCode } = cart;'], [8, '-', '  const shipping = subtotal >= 50 ? 0 : 5;'], [11, '+', "  const shipping = subtotal >= 50 || discountCode === 'FREESHIP' ? 0 : 5;"]] }], false);
     });
-    await beat('Give Codex a finish line it can check, with <code>/goal</code>.', async () => {
+    await beat('Then <code>/review</code>. Pick uncommitted changes, and Codex reviews them the way a colleague would.', async () => {
+      await cxType('/review');
+      cxMenu('Select a review preset', [['Review against a base branch', '(PR Style)'], ['Review uncommitted changes'], ['Review a commit'], ['Custom review instructions']], 1);
+      await wait(1.6);
+      cxMarker('>> Code review started: current changes <<');
+      cxRan('git diff HEAD; cat AGENTS.md docs/TICKET-SHOP-142.md; npm test', ['ℹ pass 11', 'ℹ fail 0'], 20);
+      cxMarker('<< Code review finished >>');
+      cxSay('The changes implement the discount-code rules while preserving shipping behavior. All 11 tests pass, and no actionable defects were found.');
+      await slam(S.stamp, 3, .75); c.set('happy');
+    });
+    await beat('Some rules must hold every time, not only when Codex remembers. That is what hooks are for.', async () => {
+      c.set('neutral'); await grow(S.shield, .6); tag(S.shield, '.codex/hooks.json', [0, 2.2, 0]);
+    });
+    await beat('A PreToolUse hook runs before each tool call. This one blocks a force push to main.', async () => {
+      cxRan('git push --force origin main', ['Blocked by PreToolUse hook: no force pushes to main'], 0, 'err');
+      await send([-2.3, 1, .5], [1.0, 1.1, .9], { color: BAD, r: .1, burst: false });
+      FX.burst([1.1, 1.1, .9], { n: 22, colors: [BAD, CREAM] }); Cam.shake(.18);
+      anim(.5, k => (S.shield.userData.face.material.opacity = .22 + Math.sin(k * Math.PI) * .5));
+      c.set('surprised');
+    });
+    await beat('Last, close the loop. MCP servers connect Codex to outside tools, and <code>/mcp</code> lists them.', async () => {
       c.set('focused');
-      await Board.type('/goal all tests pass on the new runner');
-      FX.ring([-1.1, .1, -.6], HERO, { r1: 1 });
+      await cxType('/mcp');
+      Board.raw('<div>🔌&nbsp; <b>MCP Tools</b></div><div class="cx-tbl"><span>• tracker:</span><span class="cx-ok">connected (24 tools)</span><span>• github:</span><span class="cx-ok">connected (31 tools)</span><span>• railway:</span><span class="cx-no">disabled (0 tools)</span></div><div class="cx-d">&nbsp;&nbsp;Use /mcp verbose for tools and resources.</div>');
+      await grow(S.sign, .5);
+      const t = add(makeTube([-2.1, 1.1, .5], [3.0, 1.25, -2.1], { h: 1.4, color: 0x8fa3ff, k: 1.4 })); await growTube(t, 1.2); pulseTube(t, CREAM);
     });
-    await beat('It keeps working toward that goal, step after step, until the condition holds.', async () => {
-      const s = Board.spin('Working toward goal');
-      for (const f of [.25, .5, .75, 1]) { await S.tank.userData.to(f, .7); S.goal.set('goal · tests pass <b>' + Math.round(f * 100) + '%</b>'); await wait(.25); }
-      S.goal.set('<b>✓ goal met</b> · tests pass');
-      s.stop(); Board.out(['[g]✓ goal met[/] · 214 tests pass']);
-      c.set('happy'); c.hop(.25, .4);
+    await beat('With the tracker connected, Codex moves SHOP-142 to Done and links the pull request.', async () => {
+      await cxType('Move SHOP-142 to Done and link the PR');
+      cxSay('Moved <b>SHOP-142</b> to Done and linked the pull request.');
+      await grow(S.ticket, .5); FX.burst([2.2, 1, 1.3], { n: 26 }); c.set('proud'); c.hop(.3, .4);
     });
-    await beat('Some tasks don’t need your laptop at all. <em>Codex Cloud</em> runs them remotely.', async () => {
-      await grow(S.ring, .7);
-      tag(S.ring, 'Codex Cloud', [0, 1.9, 0], 'tag big');
-      Board.shellLine('~/shop', 'codex cloud exec --env <ID> "update the docs"');
-      send([-2.9, 1.2, .5], [.8, 3.1, -2.2], { color: SIGNAL, h: 1.6, dur: 1.4 });
+    await beat('And plugins bundle skills and MCP servers, so the whole team installs one setup from <code>/plugins</code>.', async () => {
+      await cxType('/plugins');
+      Board.raw('<b>Plugins</b><div class="cx-d">Browse plugins from available marketplaces.</div><div class="cx-tbl" style="padding-left:0"><span>› [*] shop-team</span><span class="cx-d">Installed · checkout-rules skill · tracker MCP</span><span>&nbsp; [ ] release-notes</span><span class="cx-d">Workspace</span></div>');
+      Cam.to([3.2, 3.0, 9.6], [.2, .9, -.3], 4, E.inOutSine);
     });
-    await beat('When it’s finished, <code>codex apply</code> brings the changes back to your checkout.', async () => {
-      Board.shellLine('~/shop', 'codex apply  [d]# or codex cloud apply[/]');
-      await send([.8, 3.1, -2.2], [-2.9, 1.2, .5], { color: GOLD, h: 1.2, dur: 1.3 });
-      Board.out(['[g]applied[/] cloud changes to ~/shop']);
-    });
-    await beat('And on GitHub, comment <code>@codex review</code> on a pull request, once code review is enabled for the repo.', async () => {
-      await drop(S.pr, 0);
-      Board.out(['[b]PR comment:[/] @codex review']);
-      await wait(.6);
-      await slam(S.stamp, 3, 1.3);
-      c.set('proud');
-      if (!narrowView()) Cam.to([.9, 3.2, 11.2], [-.3, 1.2, -.3], 4, E.inOutSine);
-    });
-    await wait(1.2);
+    await wait(1.5);
   },
 },
 
-/* ======================= 05 · plug it in ======================= */
+/* ======================= 04 · quick check ======================= */
 {
-  id: 'plugin', num: '05', group: 'FRIDAY', chip: ['FRI', '16:00'], sky: 'sunset', dur: 67, concept: 'plugin',
-  name: 'Plug It In', title: 'Plug It In', eyebrow: 'Part 5 · Friday', sub: 'Your tools, your scripts, your pipeline.',
-  blurb: 'MCP servers, plugins, hooks, headless runs for CI, and resume or fork.',
+  id: 'check', num: '04', group: 'CHECK', chip: ['THU', 'quiz'], sky: 'dusk', dur: 36,
+  name: 'Quick Check', title: 'Quick Check', eyebrow: 'One question', sub: 'Which permission fits everyday work?',
+  blurb: 'One question about /permissions.',
+  board: { title: '~/shop — codex', mode: 'term' },
   setup() {
-    const c = W.guide; c.at(-3, 1.3, .5);
-    S.signs = [['docs', -1.5, -1.8], ['tickets', .4, -2.2], ['database', 2.3, -1.8]].map(([t, x, z]) => { const s = add(makeSign(t, { w: 1.5, h: .5, color: VIOLET, post: 1.3 }), x, 0, z); s.scale.setScalar(.001); s.visible = false; return s; });
-    S.tubes = S.signs.map(s => add(makeTube([-3, .8, .5], [s.position.x, .55, s.position.z + .05], { h: 1, r: .03, color: VIOLET, head: true })));
-    S.gate = add(new THREE.Mesh(rbox(.18, 1.4, 1.5, .04), std(BAD, { rough: .4, emissive: BAD, ei: .5 })), -1.4, .7, .9); S.gate.visible = false;
-    S.pipe = ['build', 'codex exec', 'deploy'].map((t, i) => { const p = add(makePedestal({ r: .55, trim: [SIGNAL, HERO, GOLD][i] }), -1 + i * 1.6, 0, 1.5); p.scale.setScalar(.001); p.visible = false; p.userData.name = t; return p; });
-    if (narrowView()) Cam.set([.2, 4.2, 13.8], [-.4, 1, -.3]);
-    else Cam.set([1, 3.8, 12.6], [-.4, 1, -.3]);
+    const c = W.guide; c.at(-2.4, .6, .4); c.set('thinking');
+    S.gates = [['Ask for approval', OKC], ['Approve for me', GOLD], ['Full Access', BAD]].map(([l, col], i) => { const g = add(gate(l, col), -.6 + i * 1.6, 0, -.4); tag(g, esc(l), [0, 1.65, 0]); return g; });
+    Cam.set([3.6, 3.2, 10.2], [.2, .8, -.2]);
   },
   async run() {
     const c = W.guide;
-    await until(2.4);
-    await beat('Friday is for wiring Codex into everything else.', async () => {
-      Board.say('Friday: connect the rest of the toolbox');
-      c.set('happy');
-    });
-    await beat('<em>MCP</em> servers connect outside tools. Add one with <code>codex mcp add</code>, and check them with <code>/mcp</code>.', async () => {
-      Board.shellLine('~/shop', 'codex mcp add docs -- <cmd>');
-      Board.shellLine('~/shop', 'codex mcp add tickets --url <url>');
-      for (let i = 0; i < 3; i++) { grow(S.signs[i], .5); growTube(S.tubes[i], .8); await wait(.45); }
-      await Board.type('/mcp');
-      Board.out(['[g]●[/] docs  [g]●[/] tickets  [g]●[/] database']);
-      S.tubes.forEach(t => pulseTube(t, CREAM));
-    });
-    await beat('<em>Plugins</em> bundle skills, connectors and MCP servers, so the whole team shares one setup.', async () => {
-      Board.out(['plugin = [t]skills[/] + [t]connectors[/] + [t]MCP servers[/]']);
-      S.tubes.forEach(t => pulseTube(t, GOLD, { rev: true }));
-      bubble(c, 'One setup for everyone', 2.4, 'good');
-    });
-    await beat('Add a marketplace with codex plugin marketplace add, then browse it with <code>/plugins</code>.', async () => {
-      Board.shellLine('~/shop', 'codex plugin marketplace add owner/repo');
-      await Board.type('/plugins');
-    });
-    await beat('<em>Hooks</em> run your own scripts at fixed moments, like before a tool runs or when a session stops.', async () => {
-      for (const s of S.signs) shrink(s, .4);
-      S.tubes.forEach(t => (t.visible = false));
-      Board.out(['events: [v]PreToolUse[/] · [v]PostToolUse[/] · [v]PermissionRequest[/] · [v]SessionStart[/] · [v]Stop[/]']);
-      c.set('focused');
-    });
-    await beat('Here, a PreToolUse hook blocks a dangerous command before it ever runs.', async () => {
-      grow(S.gate, .4);
-      const h = Board.tool('Bash', 'rm -rf build/ ~/');
-      const w = add(makeWord('rm -rf ~/', { color: '#ff8a7a', size: .3, font: FONT_M }), -2.8, 1.4, .9);
-      await moveTo(w, [-1.6, 1.4, .9], 1, E.inQuad);
-      FX.burst([-1.5, 1.4, .9], { n: 24, colors: [BAD, CREAM], speed: 1.4, up: .8 });
-      Cam.shake(.2); W.stage.remove(w);
-      h.err('[r]blocked by PreToolUse hook[/]');
-      c.set('proud');
-    });
-    await beat('Hooks live in .codex/hooks.json, and project hooks only run in a trusted project. <code>/hooks</code> shows them.', async () => {
-      Board.code(['.codex/hooks.json   [d]# or ~/.codex/hooks.json[/]', '[y]project hooks need a trusted project[/]'], { title: 'hooks' });
-    });
-    await beat('For CI and scripts, <code>codex exec</code> runs headless, with JSON events and the last message saved to a file.', async () => {
-      shrink(S.gate, .35);
-      for (const p of S.pipe) { grow(p, .45); tag(p, p.userData.name, [0, .3, .95], 'tag'); await wait(.3); }
-      Board.shellLine('ci', 'codex exec "check the release" --json -o last.txt');
-      const o = add(makeOrb(CREAM, .14), -1, .6, 1.5);
-      await FX.fly(o, [-1, .6, 1.5], [.6, .6, 1.5], { h: .8, dur: .8 }); FX.ring([.6, .32, 1.5], HERO);
-      await FX.fly(o, [.6, .6, 1.5], [2.2, .6, 1.5], { h: .8, dur: .8 }); FX.ring([2.2, .32, 1.5], GOLD);
-    });
-    await beat('And when the week ends, <code>codex resume</code> picks a session back up, and <code>codex fork</code> branches it.', async () => {
-      Board.shellLine('~/shop', 'codex resume');
-      Board.shellLine('~/shop', 'codex fork');
-      c.wave(1);
-      if (!narrowView()) Cam.to([.9, 3.4, 11.4], [-.4, .9, -.2], 4, E.inOutSine);
-    });
-    await wait(1.2);
-  },
-},
-
-/* ======================= 06 · quick check ======================= */
-{
-  id: 'check', num: '06', group: 'CHECK', chip: ['CHECK', 'Sandbox'], sky: 'dusk', dur: 35,
-  name: 'Quick Check', title: 'Quick Check', eyebrow: 'Part 6 · Quiz', sub: 'Just enough access, and no more.',
-  blurb: 'Which sandbox lets Codex edit and test, and nothing else?',
-  setup() {
-    const c = W.guide; c.at(-3, 1.2, .5); c.set('thinking');
-    S.peds = [[-1.3, OKC, 'read-only'], [.6, SIGNAL, 'workspace-write'], [2.5, BAD, 'danger-full-access']].map(([x, trim, name], i) => {
-      const p = add(makePedestal({ r: .7, trim }), x, 0, -.6);
-      tag(p, name, [0, narrowView() && i === 1 ? 1.6 : .3, 1], i === 2 ? 'tag warn' : 'tag');
-      return p;
-    });
-    if (narrowView()) Cam.set([.2, 4, 13.6], [-.3, .8, -.3]);
-    else Cam.set([1, 3.6, 12.2], [-.3, .8, -.3]);
-  },
-  async run() {
-    const c = W.guide;
-    await until(2.4);
-    Board.say('Quick check');
-    await N('Quick check. Codex must edit files and run tests in the repo, and nothing else. Which sandbox fits?');
+    CX.badge = ''; cxHeader();
+    await until(2.2);
+    await N('Quick check. Codex should edit files and run tests inside the repo, and ask before anything else. Which permission fits?');
     const r = await Quiz.ask({
-      q: 'Codex must edit files and run tests in the repo, and nothing else. Which sandbox?',
-      choices: ['read-only', 'workspace-write', 'danger-full-access'],
-      answer: 1,
-      explain: 'workspace-write lets Codex edit and run commands inside the project. Read-only can’t edit, and full access removes every limit.',
+      q: 'Edit and test inside the repo; ask before going online or outside it. Which /permissions option?',
+      choices: ['Ask for approval', 'Approve for me', 'Full Access'],
+      answer: 0,
+      explain: 'Ask for approval reads, edits and runs commands in the workspace, and asks before internet access or edits outside it.',
       timeout: 12,
     });
-    FX.ring([.6, .32, -.6], SIGNAL, { r1: 1.4 }); FX.burst([.6, .6, -.6], { n: 24, colors: [SIGNAL, CREAM] });
-    run(() => c.walk(.1, .7, 1.4));
-    if (r.correct) {
-      c.set('proud'); c.hop(.3, .42);
-      Board.out(['[g]✓ workspace-write[/] · edit and run inside the project']);
-      await N('Right. Workspace-write is exactly enough, and no more.');
-    } else {
-      c.set('surprised');
-      Board.out(['[y]→ workspace-write[/] · read-only can’t edit, full access is too much']);
-      await N('It’s workspace-write. Read-only can’t edit, and full access is far too much.');
-    }
+    run(async () => { await c.walk(-.6, .5, 1.2); FX.ring([-.6, .25, -.4], OKC); });
+    if (r.correct) { c.set('proud'); await N('Right. Ask for approval is the everyday choice.'); }
+    else { c.set('surprised'); await N('It is Ask for approval. Approve for me skips most prompts, and Full Access skips them all.'); }
     c.set('happy');
-    await N('The least access that still gets the job done. That’s the habit to keep.');
+    await N('The least freedom that still gets the job done. That is the habit to keep.');
     await wait(1);
   },
 },
 
-/* ======================= 07 · recap ======================= */
+/* ======================= 05 · recap ======================= */
 {
-  id: 'recap', num: '07', group: 'RECAP', hold: true, dock: false, titleCard: false, sky: 'night', dur: 30,
-  name: 'Recap', title: 'Recap', blurb: 'The whole week on one page, plus a team challenge.',
+  id: 'recap', num: '05', group: 'RECAP', hold: true, dock: false, titleCard: false, sky: 'sunset', dur: 30,
+  name: 'Recap', title: 'Recap', blurb: 'The whole ticket on one page.',
   setup() {
     const c = W.guide; c.set('happy');
-    const narrow = narrowView();
-    c.at(narrow ? 0 : -3.1, .3, .4);
-    if (narrow) Cam.set([0, 2.4, 8.4], [0, 1.0, 0]); else Cam.set([0, 2.5, 9.2], [0, 1.15, 0]);
+    S.cx = narrow() ? 0 : -3.1;
+    c.at(S.cx, .3, .4);
+    S.t = add(ticketCard(true), narrow() ? 1.4 : -1.6, 0, -1.2); S.t.rotation.y = .3;
+    if (narrow()) Cam.set([0, 2.4, 8.4], [0, 1.0, 0]); else Cam.set([0, 2.5, 9.2], [0, 1.15, 0]);
   },
   async run() {
     Narr.set('');

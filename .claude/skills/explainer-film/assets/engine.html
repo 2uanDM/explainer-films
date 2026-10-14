@@ -135,6 +135,8 @@ kbd{font:600 .86em/1 var(--f-mono);border:1px solid var(--line-strong);border-bo
 .bi-caret{color:var(--b-dim);flex:none}
 .bi-text{white-space:pre-wrap;word-break:break-word}
 .bi-text.ph{color:var(--b-faint)}
+.bd-foot{font-size:.9em;color:var(--b-dim);padding:.3em 0 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bd-foot:empty{display:none}
 .bi-cursor{display:inline-block;width:.62em;height:1.2em;background:var(--b-fg);vertical-align:-.2em;animation:cur 1.05s steps(2,start) infinite;margin-left:-1ch;flex:none}
 @keyframes cur{to{visibility:hidden}}
 /* entries */
@@ -390,6 +392,7 @@ kbd{font:600 .86em/1 var(--f-mono);border:1px solid var(--line-strong);border-bo
           <div class="bi-rule"></div>
           <div class="bi-line"><span class="bi-caret">&gt;</span><span class="bi-text" id="bi-text"></span><span class="bi-cursor" aria-hidden="true"></span></div>
           <div class="bi-rule"></div>
+          <div class="bd-foot" id="bd-foot"></div>
         </div>
       </div>
     </div>
@@ -540,7 +543,7 @@ const kc = s => `<span class="kb">${esc(s)}</span>`;
 /* ---------- Board: the docked panel. 'notes' mode for lessons, 'term' mode for command-line stories ---------- */
 const SPIN_GLYPHS = ['·', '✢', '✳', '✶', '✻', '✽', '✻', '✶', '✳', '✢'];
 const Board = (() => {
-  const boardEl = $('#board'), logEl = $('#bd-log'), scrollEl = $('#bd-scroll'), inputWrap = $('#bd-input'), tiText = $('#bi-text'), titleEl = $('#bd-title');
+  const boardEl = $('#board'), logEl = $('#bd-log'), scrollEl = $('#bd-scroll'), inputWrap = $('#bd-input'), tiText = $('#bi-text'), titleEl = $('#bd-title'), footEl = $('#bd-foot');
   const spinners = new Set();
   const scrollDown = () => { scrollEl.scrollTop = scrollEl.scrollHeight; scrollEl.classList.toggle('over', scrollEl.scrollHeight > scrollEl.clientHeight + 2); };
   try { new ResizeObserver(() => scrollDown()).observe(scrollEl); } catch (e) { /* no ResizeObserver */ }
@@ -558,7 +561,9 @@ const Board = (() => {
     el: boardEl,
     title(s) { titleEl.textContent = s; },
     mode(m) { boardEl.classList.toggle('m-notes', m !== 'term'); boardEl.classList.toggle('m-term', m === 'term'); B.cur = m; },
-    reset({ title = '', mode = 'notes', input = false } = {}) { logEl.innerHTML = ''; spinners.clear(); tiText.textContent = ''; B.input(input); B.mode(mode); B.title(title); },
+    reset({ title = '', mode = 'notes', input = false } = {}) { logEl.innerHTML = ''; spinners.clear(); tiText.textContent = ''; footEl.innerHTML = ''; B.input(input); B.mode(mode); B.title(title); },
+    // a status line under the input (model, folder, mode…), as many CLIs show; trusted HTML
+    footer(html) { footEl.innerHTML = html || ''; },
     clear() { logEl.innerHTML = ''; spinners.clear(); },
     input(on) { inputWrap.hidden = !on; },
     raw: (html, cls = '') => add(cls, html),
@@ -622,6 +627,8 @@ const Board = (() => {
       return B.user(s);
     },
     placeholder(s) { B.input(true); tiText.textContent = s; tiText.classList.add('ph'); },
+    // type into the input line without echoing a log entry; returns when typed. Clear with placeholder()
+    typeOnly(s, o = {}) { return B.type(s, { ...o, submit: false }); },
     tick() {
       for (const s of spinners) {
         s.g.textContent = SPIN_GLYPHS[Math.floor(D.t * 9) % SPIN_GLYPHS.length];
@@ -965,13 +972,17 @@ class Guide {
     this.head = new THREE.Object3D(); this.head.position.set(0, 1.35, 0); root.add(this.head);
     this.st = { eyeY: 1, brow: 0, browY: 0, lookX: 0, lookY: 0, tLookX: 0, tLookY: 0, blink: rand(2, 4), blinkK: 0, walk: 0, wave: 0, typing: 0, bob: rand(0, 6) };
     this.expr = 'neutral'; this.set('neutral');
+    // a story can rebuild the character's look: FILM.guideSkin(guide) may hide the default parts,
+    // add its own meshes, move guide.head, and set guide.onExpr(expr) / guide.onTick(dt, sdt, time)
+    if (typeof FILM !== 'undefined' && FILM.guideSkin) { FILM.guideSkin(this); this.set(this.expr); }
     W.chars.add(this);
   }
   at(x, z, ry = 0) { this.root.position.set(x, this.root.position.y, z); this.root.rotation.y = ry; return this; }
   set(expr) {
     const e = EXPR[expr] || EXPR.neutral; this.expr = expr; this.tgt = e;
-    for (const k in this.mouths) this.mouths[k].visible = k === e.mouth;
+    for (const k in this.mouths) this.mouths[k].visible = k === e.mouth && !this.skinned;
     if (e.look) this.look(...e.look);
+    if (this.onExpr) this.onExpr(expr);
     return this;
   }
   look(x = 0, y = 0) { this.st.tLookX = x; this.st.tLookY = y; return this; }
@@ -1002,7 +1013,7 @@ class Guide {
   tint(color, dur = .6) { const c0 = this.mat.color.clone(), c1 = new THREE.Color(color); return anim(dur, k => this.mat.color.lerpColors(c0, c1, k)); }
   reset() {
     this.root.position.set(0, 0, 0); this.root.rotation.set(0, 0, 0); this.root.scale.setScalar(this.scale); this.root.visible = true;
-    this.body.scale.set(1, 1, 1); this.mat.color.copy(this.color);
+    this.body.scale.set(1, 1, 1); this.mat.color.copy(this.color); if (this.onReset) this.onReset();
     Object.assign(this.st, { walk: 0, wave: 0, typing: 0, point: 0, tLookX: 0, tLookY: 0 });
     this.set('neutral');
   }
@@ -1031,6 +1042,7 @@ class Guide {
       a.rotation.z = lerp(a.rotation.z, rz, k); a.rotation.x = lerp(a.rotation.x, rx, k);
     });
     this.bulb.scale.setScalar(1 + Math.sin(time * 3) * .12);
+    if (this.onTick) this.onTick(dt, sdt, time);
   }
 }
 

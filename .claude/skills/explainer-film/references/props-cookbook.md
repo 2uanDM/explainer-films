@@ -135,3 +135,20 @@ map.rotation.x = -Math.PI / 2; map.position.set(0, .02, 2.5);
 - Unlock: `const l = add(lockIcon(), x, 1.5, z); await unlockIcon(l);`
 - Reveal: `await Cam.orbit(30, 4)` around the finished diorama while the last line plays.
 - Mood shift: `await sky('dusk', 3)` as the story turns.
+
+### Replicating a real CLI or app (capture it first)
+
+When the film teaches a real tool, make the board look like that tool. Capture the real thing doing the film's own task, then copy it:
+
+```bash
+tmux new-session -d -s cap -x 150 -y 46 -c <scratch-repo> "<tool command>"
+tmux send-keys -t cap "<input>" Enter; sleep 5
+tmux capture-pane -t cap -e -p > frame.ansi     # -e keeps colors; repeat while it works
+```
+
+Read the frames for the layout (prefixes such as `•`, `└`, `›`, menus and status lines), and pull the truecolor codes (`\x1b[38;2;R;G;Bm`) for the palette. Write the findings to a reference file in the film folder, because scratch captures don't survive a reboot. Then:
+- add a skin class to the board in `FILM.world()` (`Board.el.classList.add('cx')`) and style it in the film's `style.css`
+- write small helpers in story.js that emit the tool's line types with `Board.raw(html, cls)`
+- put the tool's status bar in `Board.footer(html)`
+
+Use the captured wording for real menus and messages. Run the tool in a throwaway repo, and check its effective permissions (e.g. a `/status` screen) before letting it act.
